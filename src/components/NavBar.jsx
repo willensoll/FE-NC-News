@@ -10,19 +10,28 @@ class NavBar extends Component {
         const { topics } = this.state
         return (
             <div>
-                <Link to="/">Home</Link> || &nbsp;
+                <Link to="/">Home</Link>
             {topics.map(topic => {
-                    return (<div className={topic._id}>
-                        <Link to={`/topics/${topic.slug}`}>{topic.title}</Link> || &nbsp;
-                </div>
+                    return (<div key={topic._id}>
+                        <Link to={`/topics/${topic.slug}`}>{topic.title}</Link>
+                    </div>
                     )
                 })}
             </div>
         );
     }
 
-
     componentDidMount = () => {
+        api.fetchTopics()
+            .then(topics => {
+                this.setState({
+                    topics
+                })
+            })
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (prevProps !== this.props)
         api.fetchTopics()
             .then(topics => {
                 this.setState({

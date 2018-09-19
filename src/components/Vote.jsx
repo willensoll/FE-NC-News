@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
 
 class Vote extends Component {
-    state = {  }
+    
+    state = { 
+        vote: 0
+     }
     render() { 
+        const { id, voteCount, origin } = this.props
         return ( 
-            <label>Votes: {this.props.voteCount}
-            <button>Up</button>
-            <button>Down</button>
-            </label>
-            
+            <label>Votes: {voteCount}
+            <button onClick={() => {this.voteOnArticle(id, 'up', origin)}}>Up</button>
+            <button onClick={() => {this.voteOnArticle(id, 'down', origin)}}>Down</button>
+            </label> 
          );
+    }
+
+    voteOnArticle = (id, direction, origin) => {
+        if (origin === article) {
+            api.voteOnArticle(articleId, direction)
+            this.setState({
+
+            })
+        } else {
+            api.voteOnComment(commentId, direction)
+            this.setState({
+                
+            })
+        }
+
+
     }
 }
  

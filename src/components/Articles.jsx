@@ -5,12 +5,15 @@ import {Comments, Vote, AddComment} from './index';
 
 class Articles extends Component {
     state = { 
-        articles: []
+        articles: [],
+        loading: true
+
     }
     render() {
         const { articles } = this.state
 
         return (
+            !this.state.loading ? 
             <div><h2>Articles</h2>
                 {articles.map((article)  => {
                     return (
@@ -21,15 +24,17 @@ class Articles extends Component {
                             <div>{article.created_by.avatar_url}</div>
                             <div>{article.body} </div> <br />
                             <div>Comments: {article.comments}</div>
-                            <Vote voteCount={article.votes}/>
+                            {<Vote voteCount={article.votes} id={article._id}/>}
                             <AddComment />
                             <h2>Comments</h2>
                             <Comments article={article._id} />
                         </div>
+                        
                     )
             })
         }
             </div>
+                : null //spinner here
          );
     }
 
@@ -38,7 +43,8 @@ class Articles extends Component {
         api.fetchArticles(param)
         .then((articles) => {
             this.setState({
-                articles
+                articles,
+                loading: false
             })
         })
     }
@@ -49,7 +55,8 @@ class Articles extends Component {
         api.fetchArticles(param)
         .then((articles) => {
             this.setState({
-                articles
+                articles,
+                loading: false
             })
         })
     }

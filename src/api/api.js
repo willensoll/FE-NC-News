@@ -27,3 +27,13 @@ export const fetchArticle = (articleId) => {
     return axios.get(`${URL}/articles/${articleId}`)
     .then(({data: {article}}) => article)
 }
+
+export const voteOnArticle = (articleId, direction) => {
+    return axios.put(`${URL}/comments/${articleId}?vote=${direction}`)
+
+}
+
+export const voteOnComment = (articleId, direction) => {
+    return axios.put(`${URL}/comments/${articleId}?vote=${direction}`)
+
+}

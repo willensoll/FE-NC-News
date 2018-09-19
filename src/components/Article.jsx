@@ -19,7 +19,7 @@ class Article extends Component {
                     <div>{created_by.avatar_url}</div>
                     <div>{body} </div> <br />
                     <div>Comments: {comments}</div>
-                    <Vote voteCount={votes} />
+                    <Vote voteCount={votes} id={_id} origin={'article'}/>
                     <AddComment />
                     <h2>Comments</h2>
                     <Comments article={_id} />
