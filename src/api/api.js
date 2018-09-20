@@ -49,6 +49,11 @@ export const voteOnComment = (commentId, direction, voted) => {
 }
 
 export const postCommentToArticle = (id, newComment) => {
-        return axios.post(`${URL}/articles/${id}/comments`, newComment)
+    return axios.post(`${URL}/articles/${id}/comments`, newComment)
         .then((addedComment) => addedComment)
+}
+
+
+export const deleteCommentfromArticle = (id) => {
+    return axios.delete(`${URL}/comments/${id}`)
 }

@@ -6,27 +6,33 @@ import propTypes from 'prop-types';
 
 class Comments extends Component {
     state = {
-        comments: []
+        comments: [],
+        deletedComments: []
     }
 
     render() {
-        const { comments } = this.state
+        const { comments, deletedComments } = this.state
         return (
             <div>
                 <AddComment id={this.props.article} user={this.props.user} renderComment={this.renderComment} />
                 {comments.map((comment) => {
-                    //console.log(comment)
-                    return (
-                        <div key={comment._id}>
-                            <h4>{comment.title}</h4>
-                            <div>{moment(comment.created_at).fromNow()}</div><br />
-                            <div>{comment.created_by.username}</div>
-                            <div>{comment.created_by.avatar_url}</div>
-                            <div>{comment.body} </div> <br />
-                            <Vote voteCount={comment.votes} id={comment._id} origin={"comment"} />
-                            <RemoveComment />
-                        </div>
-                    )
+                    if (!deletedComments.includes(comment._id)) {
+                        return (
+                            <div key={comment._id}>
+                                <h4>{comment.title}</h4>
+                                <div>{moment(comment.created_at).fromNow()}</div><br />
+                                <div>{comment.created_by.username}</div>
+                                <div>{comment.created_by.avatar_url}</div>
+                                <div>{comment.body} </div> <br />
+                                <Vote voteCount={comment.votes} id={comment._id} origin={"comment"} />
+                                {this.props.user === comment.created_by.username
+                                    ? <RemoveComment id={comment._id}
+                                        user={this.props.user}
+                                        deleteComment={this.deleteComment} />
+                                    : null}
+                            </div>
+                        )
+                    }
                 })
                 }
             </div>
@@ -63,7 +69,17 @@ class Comments extends Component {
                 })
             })
     }
+
+    deleteComment = (id) => {
+        api.deleteCommentfromArticle(id)
+            .then(() => {
+                this.setState({
+                    deletedComments: [...this.state.deletedComments, id]
+                })
+            })
+    }
 }
+
 export { Comments };
 
 Comments.propTypes = {

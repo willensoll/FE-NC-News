@@ -1,15 +1,16 @@
 import React from 'react';
-//import propTypes from 'prop-types'
+import propTypes from 'prop-types'
 
 
-export const RemoveComment = () => {
+export const RemoveComment = ({id, deleteComment}) => {
     return (
-        <button>delete comment</button>
+        <button onClick={() => deleteComment(id)}>Delete Comment</button>
     )
 }
+  
+RemoveComment.propTypes = {
+    deleteComment: propTypes.func.isRequired,
+    id: propTypes.string.isRequired
+} 
 
 
-/* RemoveComment.propTypes = {
-    user: propTypes.string.isRequired,
-    id: propTypes.number.isRequired
-} */
