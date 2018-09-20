@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import * as api from '../api/api';
+import propTypes from 'prop-types'
 
 class AddComment extends Component {
     state = { 
-        
         newComment: '',
      }
     render() { 
@@ -23,15 +22,20 @@ class AddComment extends Component {
     }
     
     handleSubmit = (event) => {
-        const { id, user } = this.props
-        console.log(this.props)
+        const { id, user, renderComment } = this.props
         event.preventDefault()
         const newComment = {
             body: this.state.newComment,
             created_by: user
         }
-        api.postCommentToArticle(id, newComment)
+        renderComment(id, newComment)
     }
+}
+
+AddComment.propTypes = {
+    user: propTypes.string.isRequired,
+    id: propTypes.string.isRequired,
+    renderComment: propTypes.func.isRequired
 }
  
 export {AddComment} ;

@@ -1,4 +1,5 @@
 import React from 'react';
+//import propTypes from 'prop-types'
 
 
 export const RemoveComment = () => {
@@ -7,3 +8,8 @@ export const RemoveComment = () => {
     )
 }
 
+
+/* RemoveComment.propTypes = {
+    user: propTypes.string.isRequired,
+    id: propTypes.number.isRequired
+} */

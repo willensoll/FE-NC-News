@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../api/api';
+import propTypes from 'prop-types';
 
 class Vote extends Component {
     
@@ -18,6 +19,7 @@ class Vote extends Component {
     }
 
     voteOnBody = (id, direction, origin) => {
+        
         let {voted} = this.state
         if (origin === 'article') {
             api.voteOnArticle(id, direction, voted)
@@ -33,6 +35,12 @@ class Vote extends Component {
             })
         }
     }
+}
+
+Vote.propTypes = {
+    voteCount: propTypes.number.isRequired,
+    id: propTypes.string.isRequired,
+    origin: propTypes.string.isRequired
 }
  
 export {Vote}

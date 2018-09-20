@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as api from '../api/api';
 import moment from 'moment';
-import { Comments, Vote, AddComment } from './index';
+import { Comments, Vote } from './index';
+import propTypes from 'prop-types';
 
 class Article extends Component {
     state = {
@@ -19,10 +20,9 @@ class Article extends Component {
                     <div>{created_by.avatar_url}</div>
                     <div>{body} </div> <br />
                     <div>Comments: {comments}</div>
-                    <Vote voteCount={votes} _id={_id} origin={"article"}/>
-                    <AddComment id={_id} user={this.props.activeUser} />
+                    <Vote voteCount={votes} id={_id} origin={"article"}/>
                     <h2>Comments</h2>
-                    <Comments article={_id} user={this.props.activeUser} />
+                    <Comments article={_id} user={this.props.user} />
                 </div>
                 : null //spinner here soon?!
         );
@@ -54,6 +54,10 @@ class Article extends Component {
 
 
 
+}
+
+Article.propTypes = {
+    user: propTypes.string
 }
 
 export { Article };

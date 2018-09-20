@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import {Articles, Article, NavBar} from './components/index'
+import { Articles, Article, NavBar } from './components/index'
 
 class App extends Component {
+  state = {
+    activeUser: 'cooljmessy'
+  }
   render() {
     return (
-     <div>
-       <NavBar />
-       <Route exact path="/" component={Articles} />
-       <Route exact path="/articles" component={Articles} />
-       <Route path="/topics/:topic_id" component={Articles} />
-       <Route path="/articles/:article_id" component={Article} />
+      <div>
+        <NavBar />
+        <Route exact path="/" render={({match}) => <Articles match={match} user={this.state.activeUser} />} />
+        <Route exact path="/articles" render={({ match }) => <Articles match={match} user={this.state.activeUser}  />} />
+        <Route path="/topics/:topic_id" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
+        <Route path="/articles/:article_id" render={({ match }) => <Article match={match} user={this.state.activeUser} />} />
 
-     </div>
+      </div>
     );
   }
 }

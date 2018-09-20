@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as api from '../api/api';
 import moment from 'moment';
-import {Comments, Vote, AddComment} from './index';
+import {Comments, Vote} from './index';
+import propTypes from 'prop-types';
 
 class Articles extends Component {
     state = { 
@@ -25,11 +26,9 @@ class Articles extends Component {
                             <div>{article.body} </div> <br />
                             <div>Comments: {article.comments}</div>
                             {<Vote voteCount={article.votes} id={article._id} origin={"article"}/>}
-                            <AddComment user={this.props.activeUser} id={article._id} />
                             <h2>Comments</h2>
-                            <Comments article={article._id} user={this.props.activeUser}/>
+                            <Comments article={article._id} user={this.props.user}/>
                         </div>
-                        
                     )
             })
         }
@@ -61,7 +60,10 @@ class Articles extends Component {
         })
     }
     }
+}
 
+Articles.propTypes = {
+    user: propTypes.string
 }
  
 export {Articles};
