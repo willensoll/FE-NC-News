@@ -22,7 +22,7 @@ class Comments extends Component {
                         <div>{comment.created_by.avatar_url}</div>
                         <div>{comment.body} </div> <br />
                         <div>Comments: {comment.comments}</div>
-                        <Vote voteCount={comment.votes}/>
+                        <Vote voteCount={comment.votes} id={comment._id} origin={"comment"}/>
                         <RemoveComment />
                     </div>
                 )

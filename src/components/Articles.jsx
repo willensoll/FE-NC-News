@@ -24,10 +24,10 @@ class Articles extends Component {
                             <div>{article.created_by.avatar_url}</div>
                             <div>{article.body} </div> <br />
                             <div>Comments: {article.comments}</div>
-                            {<Vote voteCount={article.votes} id={article._id}/>}
-                            <AddComment />
+                            {<Vote voteCount={article.votes} id={article._id} origin={"article"}/>}
+                            <AddComment user={this.props.activeUser} id={article._id} />
                             <h2>Comments</h2>
-                            <Comments article={article._id} />
+                            <Comments article={article._id} user={this.props.activeUser}/>
                         </div>
                         
                     )

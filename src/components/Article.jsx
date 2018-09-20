@@ -19,10 +19,10 @@ class Article extends Component {
                     <div>{created_by.avatar_url}</div>
                     <div>{body} </div> <br />
                     <div>Comments: {comments}</div>
-                    <Vote voteCount={votes} id={_id} origin={'article'}/>
-                    <AddComment />
+                    <Vote voteCount={votes} _id={_id} origin={"article"}/>
+                    <AddComment id={_id} user={this.props.activeUser} />
                     <h2>Comments</h2>
-                    <Comments article={_id} />
+                    <Comments article={_id} user={this.props.activeUser} />
                 </div>
                 : null //spinner here soon?!
         );

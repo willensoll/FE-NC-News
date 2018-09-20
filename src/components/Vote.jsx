@@ -11,13 +11,13 @@ class Vote extends Component {
         const { id, voteCount, origin } = this.props
         return ( 
             <label>Votes: {voteCount + this.state.vote}
-            <button onClick={() => {this.voteOnArticle(id, 'up', origin)}}>Up</button>
-            <button onClick={() => {this.voteOnArticle(id, 'down', origin)}}>Down</button>
+            <button onClick={() => {this.voteOnBody(id, 'up', origin)}}>Up</button>
+            <button onClick={() => {this.voteOnBody(id, 'down', origin)}}>Down</button>
             </label> 
          );
     }
 
-    voteOnArticle = (id, direction, origin) => {
+    voteOnBody = (id, direction, origin) => {
         let {voted} = this.state
         if (origin === 'article') {
             api.voteOnArticle(id, direction, voted)
@@ -28,7 +28,8 @@ class Vote extends Component {
         } else {
             api.voteOnComment(id, direction, voted)
             this.setState({
-                voted: direction
+                voted: direction,
+                vote: direction === 'up' ? + 1 : - 1
             })
         }
     }
