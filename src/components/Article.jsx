@@ -4,6 +4,7 @@ import moment from 'moment';
 import { Comments, Vote } from './index';
 import ArticlePage from './ArticlePage';
 import propTypes from 'prop-types';
+import AddArticle from './AddArticle'
 
 class Article extends Component {
     state = {
@@ -25,6 +26,7 @@ class Article extends Component {
                     id={_id}
                     user={this.props.user}
                     />
+
                 </div>
                 : null //spinner here soon?!
         );

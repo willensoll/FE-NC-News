@@ -13,13 +13,13 @@ const styles = theme => ({
     downButton: {
         margin: theme.spacing.unit,
         '&:hover': {
-            background: 'red',
+            color: 'red',
         }
       },
     upButton: {
         margin: theme.spacing.unit,    
       '&:hover': {
-          background: 'green'
+          color: 'green'
       }
     },
     
@@ -39,11 +39,11 @@ class Vote extends Component {
         const { id, voteCount, origin, classes } = this.props
         return ( 
             <label>
-            <IconButton variant="fab" color="black" className={classes.upButton} onClick={() => {this.voteOnBody(id, 'up', origin)}}><ArrowUpward /></IconButton>
+            <IconButton variant="fab" color="default" className={classes.upButton} onClick={() => {this.voteOnBody(id, 'up', origin)}}><ArrowUpward /></IconButton>
             
             {voteCount + this.state.vote}
             
-            <IconButton variant="fab" color="black" className={classes.downButton} onClick={() => {this.voteOnBody(id, 'down', origin)}}><ArrowDownward /></IconButton>
+            <IconButton variant="fab" color="default" className={classes.downButton} onClick={() => {this.voteOnBody(id, 'down', origin)}}><ArrowDownward /></IconButton>
             </label> 
          );
     }

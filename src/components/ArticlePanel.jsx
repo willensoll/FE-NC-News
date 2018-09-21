@@ -1,8 +1,8 @@
 import React from 'react';
-import Vote from './Vote'
 import propTypes from 'prop-types';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CommentIcon from '@material-ui/icons/Comment';
+import Comments from "./Comments"
 import {
     withStyles, ExpansionPanel, ExpansionPanelSummary,
     ExpansionPanelDetails, Typography,
@@ -25,6 +25,7 @@ const styles = theme => ({
     voteColumn: {
         borderRight: '1px solid red',
         maxWidth: '5%',
+        width: "2.5rem",
         paddingRight: "1rem"
     },
     column: {
@@ -36,13 +37,15 @@ const ArticlePanel = ({title, created_at, created_by, avatar, body, comments, vo
         <ExpansionPanel className={classes.root}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <div className={classes.voteColumn}>
-                    <Typography>{voteCount} </Typography>
+                <IconButton>
+                        {comments}
+                        <CommentIcon />
+                    </IconButton>
                 </div>
                 <div className={classes.titleColumn}>
                     <Typography className={classes.heading}>{title}</Typography>
                 </div>
                 {created_at}{created_by}
-
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 <Typography>
@@ -53,16 +56,14 @@ const ArticlePanel = ({title, created_at, created_by, avatar, body, comments, vo
             <Divider />
             <ExpansionPanelActions>
                 <div className={classes.column}>
-                    <IconButton>
-                        {comments}
-                        <CommentIcon />
-                    </IconButton>
+                    
                 </div>
-                <div className={classes.column}>
-                    {<Vote voteCount={voteCount} id={id} origin={"article"} />}
-                </div>
-                <Button>See more</Button>
+
+                
             </ExpansionPanelActions>
+            <div className={classes.column}>
+                <Comments article={id} user={user} articleVotes={voteCount} />
+                </div>
         </ExpansionPanel>
     )
 
@@ -79,9 +80,6 @@ ArticlePanel.propTypes = {
     id: propTypes.string,
     user: propTypes.string,
     classes: propTypes.object
-
-
-
 }
 
 

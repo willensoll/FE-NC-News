@@ -1,10 +1,24 @@
 import React from 'react';
-import propTypes from 'prop-types'
+import propTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete'
+import { withStyles } from '@material-ui/core'
 
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,
+      '&:hover': {
+          color: 'red'
+      }
+    },
+    input: {
+      display: 'none',
+    },
+  });
 
-export const RemoveComment = ({id, deleteComment}) => {
+const RemoveComment = ({id, deleteComment, classes}) => {
     return (
-        <button onClick={() => deleteComment(id)}>Delete Comment</button>
+        <IconButton className={classes.button} onClick={() => deleteComment(id)}><DeleteIcon /></IconButton>
     )
 }
   
@@ -13,4 +27,5 @@ RemoveComment.propTypes = {
     id: propTypes.string.isRequired
 } 
 
+export default withStyles(styles)(RemoveComment)
 

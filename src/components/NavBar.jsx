@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../api/api'
+import '../css/NavBar.css'
 
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,6 +16,7 @@ import Menu from '@material-ui/core/Menu';
 const styles = {
     root: {
         flexGrow: 1,
+        "text-align": "center"
     },
     grow: {
         flexGrow: 1,
@@ -23,6 +25,10 @@ const styles = {
         marginLeft: -12,
         marginRight: 20,
     },
+    logoimg: {
+        width: "40%",
+        "vertical-align": "middle"
+    }
 };
 
 class NavBar extends Component {
@@ -36,7 +42,7 @@ class NavBar extends Component {
         const open = Boolean(anchorEl)
         return (
             <div className={classes.root}>
-                <AppBar position="static">
+                <AppBar color="secondary" position="static">
                     <Toolbar>
                         <IconButton
                             className={classes.menuButton}
@@ -71,8 +77,9 @@ class NavBar extends Component {
                             })}
                         </Menu>
                         <Typography variant="title" color="inherit" className={classes.grow}>
-                            Northcoders News
-                </Typography>
+                            <img className={classes.logoimg} src={"/nclogo.png" }alt="Northcoders Logo"></img>
+                            (News)
+                        </Typography>
                         <Button color="inherit">Login</Button>
                     </Toolbar>
                 </AppBar>

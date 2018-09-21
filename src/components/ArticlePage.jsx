@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comments } from "./index"
+import Comments from "./Comments"
 import Vote from './Vote'
 import propTypes from 'prop-types';
 
@@ -24,12 +24,12 @@ const styles = theme => ({
 const ArticlePage = ({classes, title, body, created_at, created_by, avatar, comments,
 voteCount, id, user}) => {
     return (
-        <div>
+        <section>
       <Paper className={classes.root} elevation={1}>
         <Typography variant="headline" component="h3">
           {title}
         </Typography>
-        <Typography>{created_at}{created_by}<Avatar src={avatar} alt={`${created_by}'s avatar`} className={classes.avatar}></Avatar></Typography>
+        <Typography>{created_at}{created_by}</Typography>
         <Typography component="p">
           {body}
         </Typography>
@@ -39,7 +39,7 @@ voteCount, id, user}) => {
       <Paper>
       <Comments article={id} user={user} />
       </Paper>
-    </div>
+    </section>
     )
 }
 
