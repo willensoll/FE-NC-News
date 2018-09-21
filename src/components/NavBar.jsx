@@ -28,7 +28,12 @@ const styles = {
     logoimg: {
         width: "40%",
         "vertical-align": "middle"
+    },
+    addartbutton: {
+        fontSize: "12.5px",
+        color: 'white'
     }
+
 };
 
 class NavBar extends Component {
@@ -80,7 +85,7 @@ class NavBar extends Component {
                             <img className={classes.logoimg} src={"/nclogo.png" }alt="Northcoders Logo"></img>
                             (News)
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        <Link to={'/articles/addarticle'} style={{textDecoration: 'none'}}> <Button className={classes.addartbutton} color="inherit">Add Article</Button></Link>
                     </Toolbar>
                 </AppBar>
             </div>

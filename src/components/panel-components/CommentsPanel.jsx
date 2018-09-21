@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import Vote from '../Vote'
 import propTypes from 'prop-types';
-import CommentIcon from '@material-ui/icons/Comment';
 import RemoveComment from '../RemoveComment'
 import {once} from 'lodash';
 //import defaultavatar from '/apple.jpg'
 
 import {
-    withStyles, ExpansionPanel, ExpansionPanelSummary,
+    withStyles,
     ExpansionPanelDetails, Typography,
-    IconButton, Button,
-    Divider, ExpansionPanelActions, Avatar
+    ExpansionPanelActions, Avatar
 } from '@material-ui/core';
 
 const styles = theme => ({

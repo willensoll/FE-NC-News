@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import { RemoveComment, AddComment } from './index'
+import ApplyComment from './ApplyComment'
 import CommentsPanel from './panel-components/CommentsPanel'
 import Vote from './Vote.jsx'
 import * as api from '../api/api';
 import moment from 'moment';
 import propTypes from 'prop-types';
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CommentIcon from '@material-ui/icons/Comment'
-import AddComment from '@material-ui/icons/AddComment'
+
 import {
     withStyles, ExpansionPanel, ExpansionPanelSummary,
-    ExpansionPanelDetails, Typography,
-    IconButton, Button,
-    Divider, ExpansionPanelActions
+    Button,
+
 } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
         width: '100%',
+        backgroundColor: 'whitesmoke',
+        border: 'solid 1px white'
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
@@ -31,7 +31,7 @@ const styles = theme => ({
         paddingRight: "1rem"
     },
     column: {
-        flexBasis: '45%'
+        flexBasis: '33.33%'
     }
 });
 
@@ -47,7 +47,6 @@ class Comments extends Component {
         const { comments, deletedComments } = this.state
         return (
             <div>
-                {/*  <AddComment id={this.props.article} user={this.props.user} renderComment={this.renderComment} /> */}
 
                 <ExpansionPanel className={classes.root} expanded={this.state.expansionPanelOpen}>
                     <ExpansionPanelSummary expandIcon={<Button variant="contained" color="secondary" className={classes.button}
@@ -58,10 +57,14 @@ class Comments extends Component {
                         }} >
                         View Comments<CommentIcon className={classes.commentIcon} /></Button>}>
                         <div className={classes.column}>
+                <ApplyComment user={this.props.user} id={this.props.article} renderComment={this.renderComment}/>
+                </div>   
+                        <div className={classes.column}>
+                        {<Vote voteCount={this.props.articleVotes} id={this.props.article} origin={"article"} />}
                         </div>
 
-                        {<Vote voteCount={this.props.articleVotes} id={this.props.article} origin={"article"} />}
-                        <Button></Button>
+                
+                        
                     </ExpansionPanelSummary>
                     {comments.map((comment) => {
                         if (!deletedComments.includes(comment._id)) {

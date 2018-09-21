@@ -6,7 +6,7 @@ import propTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { Divider, Avatar } from '@material-ui/core'
+import { Divider } from '@material-ui/core'
 
 const styles = theme => ({
     root: {
@@ -21,7 +21,7 @@ const styles = theme => ({
 
 
 
-const ArticlePage = ({classes, title, body, created_at, created_by, avatar, comments,
+const ArticlePage = ({classes, title, body, created_at, created_by, 
 voteCount, id, user}) => {
     return (
         <section>

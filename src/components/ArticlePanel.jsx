@@ -6,7 +6,7 @@ import Comments from "./Comments"
 import {
     withStyles, ExpansionPanel, ExpansionPanelSummary,
     ExpansionPanelDetails, Typography,
-    IconButton, Button,
+    IconButton,
     Divider, ExpansionPanelActions
 } from '@material-ui/core';
 
@@ -18,34 +18,34 @@ const styles = theme => ({
             borderWidth: '0.45px',
         }
     },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
     voteColumn: {
         borderRight: '1px solid red',
         maxWidth: '5%',
-        width: "2.5rem",
-        paddingRight: "1rem"
+        width: "3rem",
+        paddingRight: "1rem",
+        marginRight: '1rem',
     },
     column: {
         flexBasis: '45%'
+    },
+    commentshow: {
+        marginRight: '1rem'
     }
 });
-const ArticlePanel = ({title, created_at, created_by, avatar, body, comments, voteCount, id, user, classes}) => {
+const ArticlePanel = ({ title, created_at, created_by, avatar, body, comments, voteCount, id, user, classes }) => {
     return (
         <ExpansionPanel className={classes.root}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <div className={classes.voteColumn}>
-                <IconButton>
+                    <IconButton>
                         {comments}
-                        <CommentIcon />
+                        <CommentIcon className={classes.commentshow} />
                     </IconButton>
                 </div>
                 <div className={classes.titleColumn}>
-                    <Typography className={classes.heading}>{title}</Typography>
+                    <Typography variant="title" className={classes.heading} align="left">{title}<br /></Typography>
+                    <Typography variant="caption" className={classes.extraInfo} align="left" gutterBottom><br />{created_at} - by {created_by}</Typography>
                 </div>
-                {created_at}{created_by}
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 <Typography>
@@ -56,14 +56,11 @@ const ArticlePanel = ({title, created_at, created_by, avatar, body, comments, vo
             <Divider />
             <ExpansionPanelActions>
                 <div className={classes.column}>
-                    
                 </div>
-
-                
             </ExpansionPanelActions>
             <div className={classes.column}>
                 <Comments article={id} user={user} articleVotes={voteCount} />
-                </div>
+            </div>
         </ExpansionPanel>
     )
 
