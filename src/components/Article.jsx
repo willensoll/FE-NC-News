@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../api/api';
 import moment from 'moment';
 import { Comments, Vote } from './index';
+import ArticlePage from './ArticlePage';
 import propTypes from 'prop-types';
 
 class Article extends Component {
@@ -14,15 +15,16 @@ class Article extends Component {
         return (
             !this.state.loading ?
                 <div>
-                    <h4>{title}</h4>
-                    <div>{moment(created_at).fromNow()}</div><br />
-                    <div>{created_by.username}</div>
-                    <div>{created_by.avatar_url}</div>
-                    <div>{body} </div> <br />
-                    <div>Comments: {comments}</div>
-                    <Vote voteCount={votes} id={_id} origin={"article"}/>
-                    <h2>Comments</h2>
-                    <Comments article={_id} user={this.props.user} />
+                    <ArticlePage title={title}
+                    body={body}
+                    created_at={moment(created_at).fromNow()}
+                    created_by={created_by.username}
+                    avatar={created_by.avatar_url}
+                    comments={comments}
+                    voteCount={votes}
+                    id={_id}
+                    user={this.props.user}
+                    />
                 </div>
                 : null //spinner here soon?!
         );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Vote, RemoveComment, AddComment } from './index'
+import { RemoveComment, AddComment } from './index'
+import Vote from './Vote'
 import * as api from '../api/api';
 import moment from 'moment';
 import propTypes from 'prop-types';

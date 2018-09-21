@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Articles, Article, NavBar } from './components/index'
+import { Article, Articles } from './components/index'
+import NavBar from './components/NavBar'
 
 class App extends Component {
   state = {

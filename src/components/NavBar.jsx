@@ -2,21 +2,80 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../api/api'
 
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+    grow: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
+};
+
 class NavBar extends Component {
     state = {
-        topics: []
+        topics: [],
+        anchorEl: null
     }
     render() {
-        const { topics } = this.state
+        const { classes } = this.props;
+        const { topics, anchorEl } = this.state;
+        const open = Boolean(anchorEl)
         return (
-            <div>
-                <Link to="/">Home</Link>
-            {topics.map(topic => {
-                    return (<div key={topic._id}>
-                        <Link to={`/topics/${topic.slug}`}>{topic.title}</Link>
-                    </div>
-                    )
-                })}
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            className={classes.menuButton}
+                            color="inherit"
+                            aria-label="Menu"
+                            aria-owns={open ? 'menu-appbar' : null}
+                            aria-haspopup="true"
+                            onClick={this.handleMenu}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={open}
+                            onClose={this.handleClose}
+                        >
+                            <MenuItem onClick={this.handleClose}><Link to={"/"}>Home</Link></MenuItem>
+                            {topics.map(topic => {
+                                return (
+                                    <div key={topic._id}>
+                                        <MenuItem onClick={this.handleClose}><Link to={`/topics/${topic.slug}`}>{topic.title}</Link></MenuItem>
+                                    </div>
+                                )
+                            })}
+                        </Menu>
+                        <Typography variant="title" color="inherit" className={classes.grow}>
+                            Northcoders News
+                </Typography>
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
             </div>
         );
     }
@@ -32,13 +91,26 @@ class NavBar extends Component {
 
     componentDidUpdate = (prevProps) => {
         if (prevProps !== this.props)
-        api.fetchTopics()
-            .then(topics => {
-                this.setState({
-                    topics
+            api.fetchTopics()
+                .then(topics => {
+                    this.setState({
+                        topics
+                    })
                 })
-            })
     }
+
+
+    handleChange = event => {
+        this.setState({ auth: event.target.checked });
+    };
+
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
 }
 
-export { NavBar };
+export default withStyles(styles)(NavBar);
