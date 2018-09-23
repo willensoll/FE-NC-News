@@ -1,75 +1,70 @@
 import React, { Component } from 'react';
-
-
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { withStyles, TextField } from '@material-ui/core';
 
 const styles = theme => ({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-    },
-    dense: {
-      marginTop: 16,
-    },
-    menu: {
-      width: 200,
-    },
-  });
-
-
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  dense: {
+    marginTop: 16,
+  },
+  menu: {
+    width: 200,
+  },
+});
 
 class AddArticle extends Component {
-    state = {
-        title: 'Your title here...',
-        age: '',
-        multiline: 'Your article here.. ',
-        currency: 'EUR',
-      };
+  state = {
+    title: 'Your title here...',
+    age: '',
+    multiline: 'Your article here.. ',
+    currency: 'EUR',
+  };
 
-    render() { 
-        const { classes } = this.props;
-        return ( 
-            <div>
-                <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="filled-title"
-          label="Title"
-          className={classes.textField}
-          value={this.state.title}
-          onChange={this.handleChange('title')}
-          margin="normal"
-          variant="filled"
-        />
-         <TextField
-          id="filled-multiline-flexible"
-          label="Article body"
-          multiline
-          rowsMax="10"
-          
-          value={this.state.multiline}
-          onChange={this.handleChange('multiline')}
-          className={classes.textField}
-          margin="normal"
-          variant="filled"
-        />
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+        <form className={classes.container} noValidate autoComplete="off">
+          <TextField
+            id="filled-title"
+            label="Title"
+            className={classes.textField}
+            value={this.state.title}
+            onChange={this.handleChange('title')}
+            margin="normal"
+            variant="filled"
+          />
+          <TextField
+            id="filled-multiline-flexible"
+            label="Article body"
+            multiline
+            rowsMax="10"
+
+            value={this.state.multiline}
+            onChange={this.handleChange('multiline')}
+            className={classes.textField}
+            margin="normal"
+            variant="filled"
+          />
         </form>
 
-            </div>
+      </div>
 
-         );
-    }
+    );
+  }
 
-    handleChange = name => event => {
-        this.setState({
-          [name]: event.target.value,
-        });
-      };
-    
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
 }
- 
+
 export default withStyles(styles)(AddArticle);

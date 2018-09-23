@@ -5,7 +5,6 @@ import Vote from './Vote.jsx'
 import * as api from '../api/api';
 import moment from 'moment';
 import propTypes from 'prop-types';
-
 import CommentIcon from '@material-ui/icons/Comment'
 
 import {
@@ -14,25 +13,18 @@ import {
 
 } from '@material-ui/core';
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         width: '100%',
-        backgroundColor: 'whitesmoke',
-        border: 'solid 1px white'
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
-    voteColumn: {
-        borderRight: '1px solid red',
-        maxWidth: '5%',
-        width: "2.5rem",
-        paddingRight: "1rem"
+        backgroundColor: '#ecf0f1',
+        border: 'solid 1px white',
     },
     column: {
-        flexBasis: '33.33%'
-    }
+        flexBasis: '43.33%'
+    },
+    button: {
+        marginTop: "0.5rem"
+    },
 });
 
 class Comments extends Component {
@@ -44,31 +36,32 @@ class Comments extends Component {
 
     render() {
         const { classes, user } = this.props
-        const { comments, deletedComments } = this.state
+        const { comments, deletedComments, expansionPanelOpen } = this.state
         return (
             <div>
 
                 <ExpansionPanel className={classes.root} expanded={this.state.expansionPanelOpen} onChange={() => null}>
-                    <ExpansionPanelSummary expandIcon={<Button variant="contained" color="secondary" className={classes.button}
-                        onClick={() => {
-                            this.setState({
-                                expansionPanelOpen: !this.state.expansionPanelOpen
-                            })
-                        }} >
-                        View Comments<CommentIcon className={classes.commentIcon} /></Button>}>
+                    <ExpansionPanelSummary>
                         <div className={classes.column}>
-                <ApplyComment user={user} id={this.props.article} renderComment={this.renderComment}/>
-                </div>   
+                            <ApplyComment user={user} id={this.props.article} renderComment={this.renderComment} />
+                        </div>
                         <div className={classes.column}>
-                        {<Vote voteCount={this.props.articleVotes} id={this.props.article} origin={"article"} />}
+                            {<Vote voteCount={this.props.articleVotes} id={this.props.article} origin={"article"} />}
+                        </div>
+                        <div>
+                            {<Button size="small" variant="contained" color="secondary" className={classes.button}
+                                onClick={() => {
+                                    this.setState({
+                                        expansionPanelOpen: !expansionPanelOpen
+                                    })
+                                }} >
+                                {!expansionPanelOpen ? 'View Comments ': 'Hide comments'} <CommentIcon className={classes.commentIcon} /></Button>}
                         </div>
 
-                
-                        
                     </ExpansionPanelSummary>
                     {comments.map((comment) => {
-                        if (!deletedComments.includes(comment._id)) {
                             return (
+                                !deletedComments.includes(comment._id) ? 
                                 <div key={comment._id}>
                                     <CommentsPanel
                                         title={comment.title}
@@ -81,9 +74,8 @@ class Comments extends Component {
                                         id={comment._id}
                                         user={this.props.user}
                                         deleteComment={this.deleteComment} />
-                                </div>
+                                </div> : null
                             )
-                        }
                     })
                     }
                 </ExpansionPanel>

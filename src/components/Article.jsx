@@ -5,7 +5,6 @@ import ArticlePage from './ArticlePage';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
 
-
 class Article extends Component {
     state = {
         article: {},
@@ -29,7 +28,7 @@ class Article extends Component {
                             user={this.props.user}
                         />
                     </div>
-                : <div>loading...</div> //spinner here soon?!
+                : <div>loading...</div>
         );
     }
 
@@ -66,9 +65,6 @@ class Article extends Component {
                 })
         }
     }
-
-
-
 }
 
 Article.propTypes = {

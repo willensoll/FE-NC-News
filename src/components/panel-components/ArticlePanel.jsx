@@ -8,7 +8,7 @@ import {
     ExpansionPanelDetails, Typography, Avatar,
 } from '@material-ui/core';
 
-const styles = theme => ({
+const styles = () => ({
     root: {
         width: '100%',
         '&:hover': {
@@ -16,7 +16,7 @@ const styles = theme => ({
             borderWidth: '0.45px',
         }
     },
-    commentsColumn: {
+    avatarColumn: {
         borderRight: '1px solid red',
         maxWidth: '5%',
         width: "3rem",
@@ -34,7 +34,7 @@ const ArticlePanel = ({ title, created_at, created_by, avatar, body, voteCount, 
     return (
         <ExpansionPanel className={classes.root}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <div className={classes.commentsColumn}>
+                <div className={classes.avatarColumn}>
                     <Avatar src={avatar} onError={once((e) => e.target.src = "/apple.jpg")} className={classes.avatarDis} />
                 </div>
                 <div className={classes.titleColumn}>

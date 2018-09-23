@@ -3,28 +3,23 @@ import * as api from '../api/api';
 import propTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import ArrowDownward from '@material-ui/icons/ArrowDownward'
 
 
 const styles = theme => ({
     downButton: {
-        margin: theme.spacing.unit,
         '&:hover': {
             color: 'red',
         }
       },
-    upButton: {
-        margin: theme.spacing.unit,    
+    upButton: {  
       '&:hover': {
           color: 'green'
       }
     },
-    
-
-    extendedIcon: {
-      marginRight: theme.spacing.unit,
+    btnGroup: {
+        display: "block",
     },
   });
 
@@ -37,13 +32,11 @@ class Vote extends Component {
     render() { 
         const { id, voteCount, origin, classes } = this.props
         return ( 
-            <label>
+            <div className={classes.btnGroup}>
             <IconButton variant="fab" color="default" className={classes.upButton} onClick={() => {this.voteOnBody(id, 'up', origin)}}><ArrowUpward /></IconButton>
-            
             {voteCount + this.state.vote}
-            
             <IconButton variant="fab" color="default" className={classes.downButton} onClick={() => {this.voteOnBody(id, 'down', origin)}}><ArrowDownward /></IconButton>
-            </label> 
+            </div> 
          );
     }
 

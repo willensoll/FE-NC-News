@@ -3,7 +3,6 @@ import Vote from '../Vote'
 import propTypes from 'prop-types';
 import RemoveComment from '../RemoveComment'
 import { once } from 'lodash';
-//import defaultavatar from '/apple.jpg'
 
 import {
     withStyles,
@@ -11,41 +10,57 @@ import {
     ExpansionPanelActions, Avatar
 } from '@material-ui/core';
 
-const styles = theme => ({
-    root: {
-        width: '100%',
-    },
+const styles = () => ({
     column: {
-        flexBasis: '45%'
+        flexBasis: '80%',
+        marginRight: '2rem'
+    },
+    commentPanel: {
+        border: 'solid 1px white'
+    },
+    commentBlock: {
+        maxWith: "100%"
+    },
+    voteBlock: {
+        textAlign: 'right',
+    },
+    avatarCol: {
+        borderRight: '1px solid white',
+        maxWidth: '5%',
+        width: "3rem",
+        paddingRight: "1rem",
+        marginRight: '1rem',
+    },
+    avatar: {
+        marginTop: '1.5rem'
     }
 });
 
 const CommentsPanel = ({ created_at, created_by, avatar, body,
     voteCount, id, user, classes, deleteComment }) => {
-        return (
-            <div>
-                <ExpansionPanelDetails>
-                    <div>
-                        <Typography className={classes.commentBody}>
-                            {body}<br />
-                        </Typography>
-                        <Typography variant="caption">{created_at}
-                            {created_by}
-                            <Avatar src={avatar} onError={once((e) => e.target.src="/apple.jpg")} alt={`${created_by}'s avatar`} className={classes.avatar} />
-                        </Typography>
-                    </div>
-                </ExpansionPanelDetails>
-                <ExpansionPanelActions>
-                    {user === created_by
-                        ? <RemoveComment id={id}
-                            user={user}
-                            deleteComment={deleteComment} />
-                        : null}
-                    {<Vote voteCount={voteCount} id={id} origin={"comment"} />}
+    return (
+        <div>
+            <ExpansionPanelDetails className={classes.commentPanel}>
+                <div className={classes.avatarCol}>
+                    <Avatar src={avatar} onError={once((e) => e.target.src = "/apple.jpg")}
+                        alt={`${created_by}'s avatar`} className={classes.avatar} />
+                </div>
+                <div className={classes.column}>
+                    <Typography variant="caption">
+                        Posted {created_at} by {created_by}
+                    </Typography>
+                    <Typography variant="body1">
+                        {body}<br />
+                    </Typography>
+                </div>
+                <ExpansionPanelActions className={classes.voteBlock}>
+                    {user === created_by ? <RemoveComment id={id} user={user} deleteComment={deleteComment} />
+                        : <Vote voteCount={voteCount} id={id} origin={"comment"} />}
                 </ExpansionPanelActions>
-            </div>
+            </ExpansionPanelDetails>
+        </div>
 
-        );
+    );
 }
 
 export default withStyles(styles)(CommentsPanel);
