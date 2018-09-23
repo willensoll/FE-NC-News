@@ -18,7 +18,7 @@ const styles = theme => ({
             borderWidth: '0.45px',
         }
     },
-    voteColumn: {
+    commentsColumn: {
         borderRight: '1px solid red',
         maxWidth: '5%',
         width: "3rem",
@@ -28,7 +28,7 @@ const styles = theme => ({
     column: {
         flexBasis: '45%'
     },
-    commentshow: {
+    commentCount: {
         marginRight: '1rem'
     }
 });
@@ -36,15 +36,15 @@ const ArticlePanel = ({ title, created_at, created_by, avatar, body, comments, v
     return (
         <ExpansionPanel className={classes.root}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <div className={classes.voteColumn}>
+                <div className={classes.commentsColumn}>
                     <IconButton>
                         {comments}
-                        <CommentIcon className={classes.commentshow} />
+                        <CommentIcon className={classes.commentCount} />
                     </IconButton>
                 </div>
                 <div className={classes.titleColumn}>
-                    <Typography variant="title" className={classes.heading} align="left">{title}<br /></Typography>
-                    <Typography variant="caption" className={classes.extraInfo} align="left" gutterBottom><br />{created_at} - by {created_by}</Typography>
+                    <Typography variant="title" className={classes.heading} align="left">{title}</Typography>
+                    <Typography variant="caption" className={classes.extraInfo} align="left" gutterBottom>{created_at} - by {created_by}</Typography>
                 </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -56,10 +56,11 @@ const ArticlePanel = ({ title, created_at, created_by, avatar, body, comments, v
             <Divider />
             <ExpansionPanelActions>
                 <div className={classes.column}>
+                
                 </div>
             </ExpansionPanelActions>
             <div className={classes.column}>
-                <Comments article={id} user={user} articleVotes={voteCount} />
+            <Comments article={id} user={user} articleVotes={voteCount} />
             </div>
         </ExpansionPanel>
     )

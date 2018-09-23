@@ -23,12 +23,6 @@ const styles = theme => ({
         fontSize: theme.typography.pxToRem(15),
         fontWeight: theme.typography.fontWeightRegular,
     },
-    voteColumn: {
-        borderRight: '1px solid red',
-        maxWidth: '5%',
-        width: "2.5rem",
-        paddingRight: "1rem"
-    },
     column: {
         flexBasis: '45%'
     }
@@ -36,18 +30,22 @@ const styles = theme => ({
 
 class CommentsPanel extends Component {
     state = {  }
-    render() { 
+    render() {
         const { created_at, created_by, avatar, body,
-              voteCount, id, user, classes, deleteComment} = this.props
+            voteCount, id, user, classes, deleteComment } = this.props
         return (
             <div>
                 <ExpansionPanelDetails>
-                    <Typography>
-                        {body} <br />
-                        <Typography>{created_at}{created_by}
-                            <Avatar src={avatar} onError={once((e) => this.replaceAvatar(e))} alt={`${created_by}'s avatar`} className={classes.avatar} />
-                        </Typography>
+                    <div>
+                    <Typography className={classes.commentBody}>
+                        {body}<br />
                     </Typography>
+                    <Typography variant="caption">{created_at}
+                        {created_by}
+                        <Avatar src={avatar} onError={once((e) => this.replaceAvatar(e))} alt={`${created_by}'s avatar`} className={classes.avatar} />
+                    </Typography>
+                    </div>
+
                 </ExpansionPanelDetails>
                 <ExpansionPanelActions>
 

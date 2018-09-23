@@ -53,7 +53,7 @@ class ApplyComment extends Component {
     }
 }
 
-AddComment.propTypes = {
+ApplyComment.propTypes = {
     user: propTypes.string.isRequired,
     id: propTypes.string.isRequired,
     renderComment: propTypes.func.isRequired

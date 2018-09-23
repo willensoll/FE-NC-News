@@ -3,18 +3,21 @@ import * as api from '../api/api';
 import moment from 'moment';
 import ArticlePage from './ArticlePage';
 import propTypes from 'prop-types';
+import {Redirect} from 'react-router-dom'
 
 
 class Article extends Component {
     state = {
         article: {},
-        loading: true
+        loading: true,
+        error: null
     }
     render() {
-        const { title, created_at, created_by, body, comments, votes, _id } = this.state.article
+        const { title, created_at, created_by, body, comments, votes, _id, error } = this.state.article
         return (
             !this.state.loading ?
-                <div>
+            error ? <Redirect to={'/errorpage'}/> 
+                : <div>
                     <ArticlePage title={title}
                     body={body}
                     created_at={moment(created_at).fromNow()}
@@ -25,7 +28,6 @@ class Article extends Component {
                     id={_id}
                     user={this.props.user}
                     />
-
                 </div>
                 : null //spinner here soon?!
         );
@@ -39,7 +41,12 @@ class Article extends Component {
                     article,
                     loading: false
                 })
-            })
+            }).catch((err) => {
+                this.setState({
+                    error: err,
+                    loading: false
+                })
+    })
     }
 
     componentDidUpdate = (prevProps) => {
@@ -51,7 +58,12 @@ class Article extends Component {
                         article,
                         loading: false
                     })
-                })
+                }).catch((err) => {
+                    this.setState({
+                        error: err,
+                        loading: false
+                    })
+        })
         }
     }
 

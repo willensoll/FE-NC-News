@@ -1,13 +1,25 @@
 import axios from 'axios';
 const URL = 'http://willensoll-nc-news.herokuapp.com/api'
 
-
-export const fetchTopics = () => {
-    return axios.get(`${URL}/topics`)
-        .then(({ data: { topics } }) => topics)
+export const withErrorHandling = (func) => {
+    return function (...args) {
+        return func(...args).catch(({response}) => {
+            console.log(response)
+            const errorInfo = {
+                code: response.status,
+                message: response.data.message
+            };
+            throw errorInfo
+        });
+    }   
 }
 
-export const fetchArticles = (param) => {
+export const fetchTopics = withErrorHandling(() => {
+    return axios.get(`${URL}/topics`)
+        .then(({ data: { topics } }) => topics)
+})
+
+export const fetchArticles = withErrorHandling((param) => {
     if (param) {
         return axios.get(`${URL}/topics/${param}/articles`)
             .then(({ data: { articles } }) => articles)
@@ -15,12 +27,12 @@ export const fetchArticles = (param) => {
         return axios.get(`${URL}/articles`)
             .then(({ data: { articles } }) => articles)
     }
-}
+})
 
-export const fetchComments = (article) => {
+export const fetchComments = withErrorHandling((article) => {
     return axios.get(`${URL}/articles/${article}/comments`)
         .then(({ data: { comments } }) => comments)
-}
+})
 
 export const fetchArticle = (articleId) => {
     return axios.get(`${URL}/articles/${articleId}`)

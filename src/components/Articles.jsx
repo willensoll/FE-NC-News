@@ -3,19 +3,21 @@ import * as api from '../api/api';
 import moment from 'moment';
 import ArticlePanel from './ArticlePanel';
 import propTypes from 'prop-types';
+import { Redirect } from 'react-router-dom'
 
 class Articles extends Component {
     state = {
         articles: [],
-        loading: true
-
+        loading: true,
+        error: null
     }
 
     render() {
-        const { articles, loading } = this.state
+        const { articles, loading, error } = this.state
         return (
             !loading ?
-                <div>
+                error ? <Redirect to={'/errorpage'}/> 
+                : <div>
                     {articles.map((article => {
                         return (
                             <div key={article._id}>
@@ -48,8 +50,13 @@ class Articles extends Component {
                     articles,
                     loading: false
                 })
-            })
-    }
+            }).catch((err) => {
+                this.setState({
+                    error: err,
+                    loading: false
+                })
+    })
+}
 
     componentDidUpdate = (prevProps) => {
         if (prevProps !== this.props) {
@@ -60,7 +67,12 @@ class Articles extends Component {
                         articles,
                         loading: false
                     })
-                })
+                }).catch((err) => {
+                    this.setState({
+                        error: err,
+                        loading: false
+                    })
+        })
         }
     }
 }
@@ -68,5 +80,5 @@ class Articles extends Component {
 export { Articles };
 
 Articles.propTypes = {
-    user: propTypes.string
+    user: propTypes.string.isRequired
 }

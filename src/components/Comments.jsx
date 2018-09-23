@@ -43,12 +43,12 @@ class Comments extends Component {
     }
 
     render() {
-        const { classes } = this.props
+        const { classes, user } = this.props
         const { comments, deletedComments } = this.state
         return (
             <div>
 
-                <ExpansionPanel className={classes.root} expanded={this.state.expansionPanelOpen}>
+                <ExpansionPanel className={classes.root} expanded={this.state.expansionPanelOpen} onChange={() => null}>
                     <ExpansionPanelSummary expandIcon={<Button variant="contained" color="secondary" className={classes.button}
                         onClick={() => {
                             this.setState({
@@ -57,7 +57,7 @@ class Comments extends Component {
                         }} >
                         View Comments<CommentIcon className={classes.commentIcon} /></Button>}>
                         <div className={classes.column}>
-                <ApplyComment user={this.props.user} id={this.props.article} renderComment={this.renderComment}/>
+                <ApplyComment user={user} id={this.props.article} renderComment={this.renderComment}/>
                 </div>   
                         <div className={classes.column}>
                         {<Vote voteCount={this.props.articleVotes} id={this.props.article} origin={"article"} />}
