@@ -3,7 +3,7 @@ import * as api from '../api/api';
 import moment from 'moment';
 import ArticlePage from './ArticlePage';
 import propTypes from 'prop-types';
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 class Article extends Component {
@@ -16,20 +16,20 @@ class Article extends Component {
         const { title, created_at, created_by, body, comments, votes, _id, error } = this.state.article
         return (
             !this.state.loading ?
-            error ? <Redirect to={'/errorpage'}/> 
-                : <div>
-                    <ArticlePage title={title}
-                    body={body}
-                    created_at={moment(created_at).fromNow()}
-                    created_by={created_by.username}
-                    avatar={created_by.avatar_url}
-                    comments={comments}
-                    voteCount={votes}
-                    id={_id}
-                    user={this.props.user}
-                    />
-                </div>
-                : null //spinner here soon?!
+                error ? <Redirect to={'/errorpage'} />
+                    : <div>
+                        <ArticlePage title={title}
+                            body={body}
+                            created_at={moment(created_at).fromNow()}
+                            created_by={created_by.username}
+                            avatar={created_by.avatar_url}
+                            comments={comments}
+                            voteCount={votes}
+                            id={_id}
+                            user={this.props.user}
+                        />
+                    </div>
+                : <div>loading...</div> //spinner here soon?!
         );
     }
 
@@ -46,7 +46,7 @@ class Article extends Component {
                     error: err,
                     loading: false
                 })
-    })
+            })
     }
 
     componentDidUpdate = (prevProps) => {
@@ -63,7 +63,7 @@ class Article extends Component {
                         error: err,
                         loading: false
                     })
-        })
+                })
         }
     }
 

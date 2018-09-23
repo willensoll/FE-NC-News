@@ -1,13 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CommentIcon from '@material-ui/icons/Comment';
-import Comments from "./Comments"
+import Comments from "../Comments"
+import { once } from 'lodash';
 import {
     withStyles, ExpansionPanel, ExpansionPanelSummary,
-    ExpansionPanelDetails, Typography,
-    IconButton,
-    Divider, ExpansionPanelActions
+    ExpansionPanelDetails, Typography, Avatar,
 } from '@material-ui/core';
 
 const styles = theme => ({
@@ -28,19 +26,16 @@ const styles = theme => ({
     column: {
         flexBasis: '45%'
     },
-    commentCount: {
+    avatarDis: {
         marginRight: '1rem'
     }
 });
-const ArticlePanel = ({ title, created_at, created_by, avatar, body, comments, voteCount, id, user, classes }) => {
+const ArticlePanel = ({ title, created_at, created_by, avatar, body, voteCount, id, user, classes }) => {
     return (
         <ExpansionPanel className={classes.root}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <div className={classes.commentsColumn}>
-                    <IconButton>
-                        {comments}
-                        <CommentIcon className={classes.commentCount} />
-                    </IconButton>
+                    <Avatar src={avatar} onError={once((e) => e.target.src = "/apple.jpg")} className={classes.avatarDis} />
                 </div>
                 <div className={classes.titleColumn}>
                     <Typography variant="title" className={classes.heading} align="left">{title}</Typography>
@@ -49,18 +44,11 @@ const ArticlePanel = ({ title, created_at, created_by, avatar, body, comments, v
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 <Typography>
-                    {avatar}
-                    {body} <br />
+                    {body}
                 </Typography>
             </ExpansionPanelDetails>
-            <Divider />
-            <ExpansionPanelActions>
-                <div className={classes.column}>
-                
-                </div>
-            </ExpansionPanelActions>
             <div className={classes.column}>
-            <Comments article={id} user={user} articleVotes={voteCount} />
+                <Comments article={id} user={user} articleVotes={voteCount} />
             </div>
         </ExpansionPanel>
     )

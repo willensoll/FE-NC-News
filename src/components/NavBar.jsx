@@ -83,7 +83,7 @@ class NavBar extends Component {
                         </Menu>
                         <Typography variant="title" color="inherit" className={classes.grow}>
                             <img className={classes.logoimg} src={"/nclogo.png" }alt="Northcoders Logo"></img>
-                            (News)
+                            {'<NEWS />'}
                         </Typography>
                         <Link to={'/articles/addarticle'} style={{textDecoration: 'none'}}> <Button className={classes.addartbutton} color="inherit">Add Article</Button></Link>
                     </Toolbar>

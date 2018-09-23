@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../api/api';
 import moment from 'moment';
-import ArticlePanel from './ArticlePanel';
+import ArticlePanel from './panel-components/ArticlePanel';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
 
@@ -16,27 +16,27 @@ class Articles extends Component {
         const { articles, loading, error } = this.state
         return (
             !loading ?
-                error ? <Redirect to={'/errorpage'}/> 
-                : <div>
-                    {articles.map((article => {
-                        return (
-                            <div key={article._id}>
-                                <ArticlePanel
-                                    title={article.title}
-                                    created_at={moment(article.created_at).fromNow()}
-                                    created_by={article.created_by.username}
-                                    avatar={article.created_by.avatar_url}
-                                    body={article.body}
-                                    comments={article.comments}
-                                    voteCount={article.votes}
-                                    id={article._id}
-                                    user={this.props.user}
-                                />
-                            </div>
-                        )
-                    })
-                    )}
-                </div>
+                error ? <Redirect to={'/errorpage'} />
+                    : <div>
+                        {articles.map((article => {
+                            return (
+                                <div key={article._id}>
+                                    <ArticlePanel
+                                        title={article.title}
+                                        created_at={moment(article.created_at).fromNow()}
+                                        created_by={article.created_by.username}
+                                        avatar={article.created_by.avatar_url}
+                                        body={article.body}
+                                        comments={article.comments}
+                                        voteCount={article.votes}
+                                        id={article._id}
+                                        user={this.props.user}
+                                    />
+                                </div>
+                            )
+                        })
+                        )}
+                    </div>
                 : <div>loading...</div>
 
         )
@@ -55,8 +55,8 @@ class Articles extends Component {
                     error: err,
                     loading: false
                 })
-    })
-}
+            })
+    }
 
     componentDidUpdate = (prevProps) => {
         if (prevProps !== this.props) {
@@ -72,7 +72,7 @@ class Articles extends Component {
                         error: err,
                         loading: false
                     })
-        })
+                })
         }
     }
 }
