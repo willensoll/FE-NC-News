@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { withStyles, TextField } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import TitleField from './AddArticleComponents/TitleField'
 import TopicSelect from './AddArticleComponents/TopicSelect'
+import SubmitButton from './AddArticleComponents/SubmitButton'
 import ArticleField from './AddArticleComponents/ArticleField'
 import propTypes from 'prop-types';
+import * as api from '../api/api'
 
 const styles = () => ({
   container: {
@@ -12,6 +14,9 @@ const styles = () => ({
     justifyContent: 'space-between',
     margin: '1% 10%'
   },
+  button: {
+    display: 'block'
+  }
 });
 
 class AddArticle extends Component {
@@ -29,6 +34,8 @@ class AddArticle extends Component {
           <TitleField handleChange={this.handleChange} />
           <TopicSelect handleChange={this.handleChange} selected={this.state.topic} />
           <ArticleField handleChange={this.handleChange} />
+          <SubmitButton handleSubmit={this.handleSubmit} />
+
         </form>
       </section>
 
@@ -38,10 +45,18 @@ class AddArticle extends Component {
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
-    }, () => {
-      console.log(this.state)
     });
   };
+
+  handleSubmit = (event) => {
+    const {title, articleBody, topic} = this.state
+    const newArticle = {
+      title: title,
+      body: articleBody,
+      created_by: this.props.user
+    }
+    api.postArticle(topic, newArticle)
+  }
 
 }
 

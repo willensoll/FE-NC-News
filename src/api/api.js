@@ -68,3 +68,10 @@ export const postCommentToArticle = (id, newComment) => {
 export const deleteCommentfromArticle = (id) => {
     return axios.delete(`${URL}/comments/${id}`)
 }
+
+export const postArticle = (topic, newArticle) => {
+    console.log(topic)
+    console.log(newArticle)
+    return axios.post(`${URL}/topics/${topic}/articles`, newArticle)
+        .then((addedArticle) => console.log(addedArticle))
+}
