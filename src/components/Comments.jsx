@@ -87,7 +87,7 @@ class Comments extends Component {
         api.fetchComments(articleId)
             .then((comments) => {
                 this.setState({
-                    comments
+                    comments: comments.sort((a, b) => b.created_at.localeCompare(a.created_at))
                 })
             })
     }
@@ -98,7 +98,7 @@ class Comments extends Component {
             api.fetchComments(articleId)
                 .then((comments) => {
                     this.setState({
-                        comments
+                        comments: comments.sort((a, b) => b.created_at.localeCompare(a.created_at))
                     })
                 })
         }

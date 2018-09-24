@@ -47,7 +47,7 @@ class Articles extends Component {
         api.fetchArticles(param)
             .then((articles) => {
                 this.setState({
-                    articles,
+                    articles: articles.sort((a, b) => b.created_at.localeCompare(a.created_at)),
                     loading: false
                 })
             }).catch((err) => {
@@ -64,7 +64,7 @@ class Articles extends Component {
             api.fetchArticles(param)
                 .then((articles) => {
                     this.setState({
-                        articles,
+                        articles: articles.sort((a, b) => b.created_at.localeCompare(a.created_at)),
                         loading: false
                     })
                 }).catch((err) => {
