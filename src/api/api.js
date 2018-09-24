@@ -4,12 +4,13 @@ const URL = 'http://willensoll-nc-news.herokuapp.com/api'
 export const withErrorHandling = (func) => {
     return function (...args) {
         return func(...args).catch(({response}) => {
-            console.log(response)
+            if (response) {
             const errorInfo = {
                 code: response.status,
                 message: response.data.message
             };
             throw errorInfo
+        }
         });
     }   
 }
