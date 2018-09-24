@@ -1,4 +1,6 @@
-Link to live deployment [here]( https://we-fe-nc-news.herokuapp.com/)
+Link to live FE deployment [here]( https://we-fe-nc-news.herokuapp.com/)
+Link to backend [here](https://github.com/willensoll/BE2-northcoders-news)
+
 
 full readme to follow.
 
