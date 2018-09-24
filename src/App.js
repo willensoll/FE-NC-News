@@ -19,6 +19,7 @@ class App extends Component {
           <Route exact path="/articles/add_article" render={({ match }) => <AddArticle match={match} user={this.state.activeUser} />} />
           <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} user={this.state.activeUser} />} />
           <Route path="/errorpage" component={ErrorPage} />
+          <Route component={ErrorPage} />
         </Switch>
       </div>
     );
