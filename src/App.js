@@ -15,8 +15,8 @@ class App extends Component {
         <Route exact path="/" render={({match}) => <Articles match={match} user={this.state.activeUser} />} />
         <Route exact path="/articles" render={({ match }) => <Articles match={match} user={this.state.activeUser}  />} />
         <Route path="/topics/:topic_id" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
-        <Route path="/articles/:article_id" render={({ match }) => <Article match={match} user={this.state.activeUser} />} />
-        <Route path="/articles/addarticle" render={({ match }) => <AddArticle match={match} user={this.state.activeUser} />} />
+        <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} user={this.state.activeUser} />} />
+        <Route exact path="/articles/post/addarticle" render={({ match }) => <AddArticle match={match} user={this.state.activeUser} />} />
         <Route path="/errorpage" component={ErrorPage} />
       </div>
     );
