@@ -48,7 +48,7 @@ class AddArticle extends Component {
     });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = () => {
     const {title, articleBody, topic} = this.state
     const newArticle = {
       title: title,
@@ -60,7 +60,7 @@ class AddArticle extends Component {
 
 }
 
-AddArticle.propTypes ={ 
+AddArticle.propTypes = { 
   user: propTypes.string.isRequired
 }
 

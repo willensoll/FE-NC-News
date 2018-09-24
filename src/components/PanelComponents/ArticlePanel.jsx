@@ -2,10 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Comments from "../Comments"
-import { once } from 'lodash';
+import Avatars from '../Avatars'
+
 import {
     withStyles, ExpansionPanel, ExpansionPanelSummary,
-    ExpansionPanelDetails, Typography, Avatar,
+    ExpansionPanelDetails, Typography,
 } from '@material-ui/core';
 
 const styles = () => ({
@@ -35,7 +36,7 @@ const ArticlePanel = ({ title, created_at, created_by, avatar, body, voteCount, 
         <ExpansionPanel className={classes.root}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <div className={classes.avatarColumn}>
-                    <Avatar src={avatar} onError={once((e) => e.target.src = "/apple.jpg")} className={classes.avatarDis} />
+                    <Avatars avatar={avatar} user={created_by} className={classes.avatarDis} />
                 </div>
                 <div className={classes.titleColumn}>
                     <Typography variant="title" className={classes.heading} align="left">{title}</Typography>

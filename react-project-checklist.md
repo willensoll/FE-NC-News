@@ -7,6 +7,6 @@ add comment post
 
 add readme
 
-further styling
+sort backend no comment on article error
 
-add disabled bool for votes. 
+further styling

@@ -7,7 +7,7 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import ArrowDownward from '@material-ui/icons/ArrowDownward'
 
 
-const styles = theme => ({
+const styles = () => ({
     downButton: {
         '&:hover': {
             color: 'red',
@@ -32,9 +32,17 @@ class Vote extends Component {
         const { id, voteCount, origin, classes } = this.props
         return (
             <div className={classes.btnGroup}>
-                <IconButton variant="fab" color="default" className={classes.upButton} disabled={this.state.vote > 0 ? true : false} onClick={() => { this.voteOnBody(id, 'up', origin) }}><ArrowUpward /></IconButton>
+                <IconButton variant="fab" color="default" className={classes.upButton}
+                 disabled={this.state.vote > 0 ? true : false} 
+                 onClick={() => { this.voteOnBody(id, 'up', origin) }}>
+                 <ArrowUpward />
+                 </IconButton>
                 {voteCount + this.state.vote}
-                <IconButton variant="fab" color="default" className={classes.downButton} disabled={this.state.vote < 0 ? true : false} onClick={() => { this.voteOnBody(id, 'down', origin) }}><ArrowDownward /></IconButton>
+                <IconButton variant="fab" color="default" className={classes.downButton}
+                 disabled={this.state.vote < 0 ? true : false} 
+                 onClick={() => { this.voteOnBody(id, 'down', origin) }}>
+                 <ArrowDownward />
+                 </IconButton>
             </div>
         );
     }

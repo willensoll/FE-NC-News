@@ -13,7 +13,7 @@ import {
 
 } from '@material-ui/core';
 
-const styles = (theme) => ({
+const styles = () => ({
     root: {
         width: '100%',
         backgroundColor: '#ecf0f1',
@@ -35,18 +35,17 @@ class Comments extends Component {
     }
 
     render() {
-        const { classes, user } = this.props
+        const { classes, user, article, articleVotes } = this.props
         const { comments, deletedComments, expansionPanelOpen } = this.state
         return (
             <div>
-
-                <ExpansionPanel className={classes.root} expanded={this.state.expansionPanelOpen} onChange={() => null}>
+                <ExpansionPanel className={classes.root} expanded={expansionPanelOpen} onChange={() => null}>
                     <ExpansionPanelSummary>
                         <div className={classes.column}>
-                            <ApplyComment user={user} id={this.props.article} renderComment={this.renderComment} />
+                            <ApplyComment user={user} id={article} renderComment={this.renderComment} />
                         </div>
                         <div className={classes.column}>
-                            {<Vote voteCount={this.props.articleVotes} id={this.props.article} origin={"article"} />}
+                            {<Vote voteCount={articleVotes} id={article} origin={"article"} />}
                         </div>
                         <div>
                             {<Button size="small" variant="contained" color="secondary" className={classes.button}
@@ -128,5 +127,5 @@ export default withStyles(styles)(Comments);
 
 Comments.propTypes = {
     article: propTypes.string.isRequired,
-    user: propTypes.string
+    user: propTypes.string.isRequired
 }

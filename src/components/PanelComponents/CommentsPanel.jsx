@@ -2,12 +2,13 @@ import React from 'react';
 import Vote from '../Vote'
 import propTypes from 'prop-types';
 import RemoveComment from '../RemoveComment'
-import { once } from 'lodash';
+import Avatars from '../Avatars'
+
 
 import {
     withStyles,
     ExpansionPanelDetails, Typography,
-    ExpansionPanelActions, Avatar
+    ExpansionPanelActions,
 } from '@material-ui/core';
 
 const styles = () => ({
@@ -42,8 +43,7 @@ const CommentsPanel = ({ created_at, created_by, avatar, body,
         <div>
             <ExpansionPanelDetails className={classes.commentPanel}>
                 <div className={classes.avatarCol}>
-                    <Avatar src={avatar} onError={once((e) => e.target.src = "/apple.jpg")}
-                        alt={`${created_by}'s avatar`} className={classes.avatar} />
+                    <Avatars avatar={avatar} user={created_by} className={classes.avatar} />
                 </div>
                 <div className={classes.column}>
                     <Typography variant="caption">
