@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ApplyComment from './ApplyComment'
-import CommentsPanel from './panel-components/CommentsPanel'
+import CommentsPanel from './PanelComponents/CommentsPanel'
 import Vote from './Vote.jsx'
 import * as api from '../api/api';
 import moment from 'moment';

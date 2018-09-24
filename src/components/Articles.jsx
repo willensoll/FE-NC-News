@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../api/api';
 import moment from 'moment';
-import ArticlePanel from './panel-components/ArticlePanel';
+import ArticlePanel from './PanelComponents/ArticlePanel';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
 

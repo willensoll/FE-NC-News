@@ -27,7 +27,7 @@ class AddArticle extends Component {
   };
 
   render() {
-    const { classes, user } = this.props;
+    const { classes } = this.props;
     return (
       <section className={classes.root}>
         <form className={classes.container} noValidate autoComplete="off">
