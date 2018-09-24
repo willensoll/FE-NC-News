@@ -70,8 +70,6 @@ export const deleteCommentfromArticle = (id) => {
 }
 
 export const postArticle = (topic, newArticle) => {
-    console.log(topic)
-    console.log(newArticle)
     return axios.post(`${URL}/topics/${topic}/articles`, newArticle)
-        .then((addedArticle) => console.log(addedArticle))
+        .then((addedArticle) => addedArticle)
 }
