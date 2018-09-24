@@ -1,60 +1,36 @@
 import React, { Component } from 'react';
 import { withStyles, TextField } from '@material-ui/core';
+import TitleField from './AddArticleComponents/TitleField'
+import TopicSelect from './AddArticleComponents/TopicSelect'
+import ArticleField from './AddArticleComponents/ArticleField'
+import propTypes from 'prop-types';
 
-const styles = theme => ({
+const styles = () => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
-  dense: {
-    marginTop: 16,
-  },
-  menu: {
-    width: 200,
+    justifyContent: 'space-between',
+    margin: '1% 10%'
   },
 });
 
 class AddArticle extends Component {
   state = {
-    title: 'Your title here...',
-    age: '',
-    multiline: 'Your article here.. ',
-    currency: 'EUR',
+    title: '',
+    articleBody: '',
+    topic: '',
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, user } = this.props;
     return (
-      <div>
+      <section className={classes.root}>
         <form className={classes.container} noValidate autoComplete="off">
-          <TextField
-            id="filled-title"
-            label="Title"
-            className={classes.textField}
-            value={this.state.title}
-            onChange={this.handleChange('title')}
-            margin="normal"
-            variant="filled"
-          />
-          <TextField
-            id="filled-multiline-flexible"
-            label="Article body"
-            multiline
-            rowsMax="10"
-
-            value={this.state.multiline}
-            onChange={this.handleChange('multiline')}
-            className={classes.textField}
-            margin="normal"
-            variant="filled"
-          />
+          <TitleField handleChange={this.handleChange} />
+          <TopicSelect handleChange={this.handleChange} selected={this.state.topic} />
+          <ArticleField handleChange={this.handleChange} />
         </form>
-
-      </div>
+      </section>
 
     );
   }
@@ -62,9 +38,15 @@ class AddArticle extends Component {
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
+    }, () => {
+      console.log(this.state)
     });
   };
 
+}
+
+AddArticle.propTypes ={ 
+  user: propTypes.string.isRequired
 }
 
 export default withStyles(styles)(AddArticle);
