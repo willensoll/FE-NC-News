@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../api/api'
-import '../css/NavBar.css'
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles, AppBar, Toolbar, Typography, Button, IconButton, MenuItem, Menu } from '@material-ui/core';
 
@@ -74,8 +73,8 @@ class NavBar extends Component {
                             })}
                         </Menu>
                         <Typography variant="title" color="inherit" className={classes.grow}>
-                            <img className={classes.logoimg} src={"/nclogo.png" }alt="Northcoders Logo"></img>
-                            {'<NEWS />'}
+                            <Link to="/"><img className={classes.logoimg} src={"/nclogo.png" }alt="Northcoders Logo" href="/"></img></Link> 
+                            {'<NEWS />'} 
                         </Typography>
                         <Link to={'/articles/add_article'} style={{textDecoration: 'none'}}> <Button className={classes.addartbutton} color="inherit">Add Article</Button></Link>
                     </Toolbar>

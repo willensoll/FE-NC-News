@@ -12,37 +12,36 @@ const styles = theme => ({
         '&:hover': {
             color: 'red',
         }
-      },
-    upButton: {  
-      '&:hover': {
-          color: 'green'
-      }
+    },
+    upButton: {
+        '&:hover': {
+            color: 'green'
+        }
     },
     btnGroup: {
         display: "block",
     },
-  });
+});
 
 class Vote extends Component {
-    
-    state = { 
+    state = {
         voted: '',
         vote: 0
-     }
-    render() { 
+    }
+    render() {
         const { id, voteCount, origin, classes } = this.props
-        return ( 
+        return (
             <div className={classes.btnGroup}>
-            <IconButton variant="fab" color="default" className={classes.upButton} onClick={() => {this.voteOnBody(id, 'up', origin)}}><ArrowUpward /></IconButton>
-            {voteCount + this.state.vote}
-            <IconButton variant="fab" color="default" className={classes.downButton} onClick={() => {this.voteOnBody(id, 'down', origin)}}><ArrowDownward /></IconButton>
-            </div> 
-         );
+                <IconButton variant="fab" color="default" className={classes.upButton} disabled={this.state.vote > 0 ? true : false} onClick={() => { this.voteOnBody(id, 'up', origin) }}><ArrowUpward /></IconButton>
+                {voteCount + this.state.vote}
+                <IconButton variant="fab" color="default" className={classes.downButton} disabled={this.state.vote < 0 ? true : false} onClick={() => { this.voteOnBody(id, 'down', origin) }}><ArrowDownward /></IconButton>
+            </div>
+        );
     }
 
     voteOnBody = (id, direction, origin) => {
-        
-        let {voted} = this.state
+
+        let { voted } = this.state
         if (origin === 'article') {
             api.voteOnArticle(id, direction, voted)
             this.setState({
@@ -64,5 +63,5 @@ Vote.propTypes = {
     id: propTypes.string.isRequired,
     origin: propTypes.string.isRequired
 }
- 
+
 export default withStyles(styles)(Vote);

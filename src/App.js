@@ -10,15 +10,17 @@ class App extends Component {
   }
   render() {
     return (
-      <Switch>
+      <div>
         <NavBar />
-        <Route exact path="/" render={({match}) => <Articles match={match} user={this.state.activeUser} />} />
-        <Route exact path="/articles" render={({ match }) => <Articles match={match} user={this.state.activeUser}  />} />
-        <Route path="/topics/:topic_id" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
-        <Route exact path="/articles/add_article" render={({ match }) => <AddArticle match={match} user={this.state.activeUser} />} />
-        <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} user={this.state.activeUser} />} />
-        <Route path="/errorpage" component={ErrorPage} />
-      </Switch>
+        <Switch>
+          <Route exact path="/" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
+          <Route exact path="/articles" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
+          <Route path="/topics/:topic_id" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
+          <Route exact path="/articles/add_article" render={({ match }) => <AddArticle match={match} user={this.state.activeUser} />} />
+          <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} user={this.state.activeUser} />} />
+          <Route path="/errorpage" component={ErrorPage} />
+        </Switch>
+      </div>
     );
   }
 }
