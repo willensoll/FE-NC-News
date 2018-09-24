@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://willensoll-nc-news.herokuapp.com/api'
+const URL = 'https://willensoll-nc-news.herokuapp.com/api'
 
 export const withErrorHandling = (func) => {
     return function (...args) {
