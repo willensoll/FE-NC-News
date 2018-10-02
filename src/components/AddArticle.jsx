@@ -5,7 +5,7 @@ import TopicSelect from './AddArticleComponents/TopicSelect'
 import SubmitButton from './AddArticleComponents/SubmitButton'
 import ArticleField from './AddArticleComponents/ArticleField'
 import propTypes from 'prop-types';
-import * as api from '../api/api'
+import * as api from '../apiUtils/api'
 
 const styles = () => ({
   container: {

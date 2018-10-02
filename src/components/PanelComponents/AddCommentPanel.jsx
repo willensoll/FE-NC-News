@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 import {
-    withStyles, TextField
+    withStyles, TextField, Popper, Paper
 } from '@material-ui/core';
 
 
 const styles = (theme) => ({
     textField: {
         width: '50vw',
-        marginTop: '2rem'
+        marginTop: '2rem',
+        display: 'inline-block'
     }
 })
 
 const AddCommentPanel = ({ handleInput, handleSubmit, classes }) => {
     return (
+        <div>
             <TextField
                 id="filled-multiline-flexible"
                 label="Your comment here.."
@@ -25,10 +27,10 @@ const AddCommentPanel = ({ handleInput, handleSubmit, classes }) => {
                 margin="none"
                 fullWidth
                 variant="filled"
-                placeholder="Your article here.."
                 required={true}
                 className={classes.textField}
             />
+        </div>
     )
 }
 export default withStyles(styles)(AddCommentPanel);

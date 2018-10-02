@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as api from '../api/api';
+import * as api from '../apiUtils/api';
 import propTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';

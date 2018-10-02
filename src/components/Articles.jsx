@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as api from '../api/api';
+import * as api from '../apiUtils/api';
 import moment from 'moment';
 import ArticlePanel from './PanelComponents/ArticlePanel';
 import propTypes from 'prop-types';

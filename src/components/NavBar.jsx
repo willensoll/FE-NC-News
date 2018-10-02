@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as api from '../api/api'
-import MenuIcon from '@material-ui/icons/Menu';
-import { withStyles, AppBar, Toolbar, Typography, Button, IconButton, MenuItem, Menu } from '@material-ui/core';
+import * as api from '../apiUtils/api'
+import SideDrawer from './SideDrawer.jsx'
+import { withStyles, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
-const styles = {
+const styles = theme => ({
     root: {
         flexGrow: 1,
-        "text-align": "center"
+        textAlign: "center",
+        zIndex: 1,
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'flex',
     },
     grow: {
         flexGrow: 1,
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
     },
     menuButton: {
         marginLeft: -12,
@@ -18,60 +25,29 @@ const styles = {
     },
     logoimg: {
         width: "40%",
-        "vertical-align": "middle"
+        verticalAlign: "middle"
     },
     addartbutton: {
         fontSize: "12.5px",
         color: 'white'
     }
 
-};
+});
 
 class NavBar extends Component {
     state = {
         topics: [],
-        anchorEl: null
+
     }
     render() {
         const { classes } = this.props;
-        const { topics, anchorEl } = this.state;
-        const open = Boolean(anchorEl)
+        const { topics } = this.state;
+
         return (
             <div className={classes.root}>
-                <AppBar color="secondary" position="static">
+                <AppBar color="secondary" position="static" className={classes.appBar}>
                     <Toolbar>
-                        <IconButton
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="Menu"
-                            aria-owns={open ? 'menu-appbar' : null}
-                            aria-haspopup="true"
-                            onClick={this.handleMenu}>
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={open}
-                            onClose={this.handleClose}
-                        >
-                            <MenuItem onClick={this.handleClose}><Link to={"/"}>Home</Link></MenuItem>
-                            {topics.map(topic => {
-                                return (
-                                    <div key={topic._id}>
-                                        <MenuItem onClick={this.handleClose}><Link to={`/topics/${topic.slug}`}>{topic.title}</Link></MenuItem>
-                                    </div>
-                                )
-                            })}
-                        </Menu>
+                        <SideDrawer topics={topics}/>
                         <Typography variant="title" color="inherit" className={classes.grow}>
                             <Link to="/"><img className={classes.logoimg} src={"/nclogo.png" }alt="Northcoders Logo" href="/"></img></Link> 
                             {'<NEWS />'} 
@@ -101,19 +77,6 @@ class NavBar extends Component {
                     })
                 })
     }
-
-
-    handleChange = event => {
-        this.setState({ auth: event.target.checked });
-    };
-
-    handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
 }
 
 export default withStyles(styles)(NavBar);

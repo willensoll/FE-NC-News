@@ -6,18 +6,20 @@ import NavBar from './components/NavBar'
 
 class App extends Component {
   state = {
-    activeUser: 'cooljmessy'
+    activeUser: 'cooljmessy',
+    filterVal: null
   }
   render() {
+    const { activeUser } = this.state
     return (
       <div>
         <NavBar />
         <Switch>
-          <Route exact path="/" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
-          <Route exact path="/articles" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
-          <Route path="/topics/:topic_id" render={({ match }) => <Articles match={match} user={this.state.activeUser} />} />
-          <Route exact path="/articles/add_article" render={({ match }) => <AddArticle match={match} user={this.state.activeUser} />} />
-          <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} user={this.state.activeUser} />} />
+          <Route exact path="/" render={({ match }) => <Articles match={match} user={activeUser} />} />
+          <Route exact path="/articles" render={({ match }) => <Articles match={match} user={activeUser} />} />
+          <Route path="/topics/:topic_id" render={({ match }) => <Articles match={match} user={activeUser} />} />
+          <Route exact path="/articles/add_article" render={({ match }) => <AddArticle match={match} user={activeUser} />} />
+          <Route exact path="/articles/:article_id" render={({ match }) => <Article match={match} user={activeUser} />} />
           <Route path="/errorpage" component={ErrorPage} />
           <Route component={ErrorPage} />
         </Switch>

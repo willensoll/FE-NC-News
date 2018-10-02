@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import ApplyComment from './ApplyComment'
 import CommentsPanel from './PanelComponents/CommentsPanel'
 import Vote from './Vote.jsx'
-import * as api from '../api/api';
+import * as api from '../apiUtils/api';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import CommentIcon from '@material-ui/icons/Comment'
 
 import {
     withStyles, ExpansionPanel, ExpansionPanelSummary,
-    Button,
-
+    Button
 } from '@material-ui/core';
 
 const styles = () => ({
@@ -20,7 +19,8 @@ const styles = () => ({
         border: 'solid 1px white',
     },
     column: {
-        flexBasis: '43.33%'
+        flexBasis: '43.33%',
+        marginBottom: '1rem'
     },
     button: {
         marginTop: "0.5rem"
@@ -31,12 +31,13 @@ class Comments extends Component {
     state = {
         comments: [],
         deletedComments: [],
+        noComments: false,
         expansionPanelOpen: false
     }
 
     render() {
         const { classes, user, article, articleVotes } = this.props
-        const { comments, deletedComments, expansionPanelOpen } = this.state
+        const { comments, deletedComments, expansionPanelOpen, noComments } = this.state
         return (
             <div>
                 <ExpansionPanel className={classes.root} expanded={expansionPanelOpen} onChange={() => null}>
@@ -48,35 +49,33 @@ class Comments extends Component {
                             {<Vote voteCount={articleVotes} id={article} origin={"article"} />}
                         </div>
                         <div>
-                            {<Button size="small" variant="contained" color="secondary" className={classes.button}
+                            {<Button size="small" variant="contained" color="secondary" className={classes.button} disabled={noComments ? true : false}
                                 onClick={() => {
                                     this.setState({
                                         expansionPanelOpen: !expansionPanelOpen
                                     })
                                 }} >
-                                {!expansionPanelOpen ? 'View Comments ': 'Hide comments'} <CommentIcon className={classes.commentIcon} /></Button>}
+                                {noComments? 'No Comments' : !expansionPanelOpen ? 'View Comments ' : 'Hide comments'} <CommentIcon className={classes.commentIcon} /></Button>}
                         </div>
-
                     </ExpansionPanelSummary>
-                    {comments.map((comment) => {
+                        {comments.map((comment) => {
                             return (
-                                !deletedComments.includes(comment._id) ? 
-                                <div key={comment._id}>
-                                    <CommentsPanel
-                                        title={comment.title}
-                                        created_at={moment(comment.created_at).fromNow()}
-                                        created_by={comment.created_by.username}
-                                        avatar={comment.created_by.avatar_url}
-                                        body={comment.body}
-                                        comments={comment.comments}
-                                        voteCount={comment.votes}
-                                        id={comment._id}
-                                        user={this.props.user}
-                                        deleteComment={this.deleteComment} />
-                                </div> : null
+                                !deletedComments.includes(comment._id) ?
+                                    <div key={comment._id}>
+                                        <CommentsPanel
+                                            title={comment.title}
+                                            created_at={moment(comment.created_at).fromNow()}
+                                            created_by={comment.created_by.username}
+                                            avatar={comment.created_by.avatar_url}
+                                            body={comment.body}
+                                            comments={comment.comments}
+                                            voteCount={comment.votes}
+                                            id={comment._id}
+                                            user={this.props.user}
+                                            deleteComment={this.deleteComment} />
+                                    </div> : null
                             )
-                    })
-                    }
+                        })}
                 </ExpansionPanel>
             </div>
         );
@@ -89,6 +88,10 @@ class Comments extends Component {
                 this.setState({
                     comments: comments.sort((a, b) => b.created_at.localeCompare(a.created_at))
                 })
+            }, (error) => {
+                if (error.code === 404) this.setState({
+                    noComments: true
+                })
             })
     }
 
@@ -99,6 +102,10 @@ class Comments extends Component {
                 .then((comments) => {
                     this.setState({
                         comments: comments.sort((a, b) => b.created_at.localeCompare(a.created_at))
+                    })
+                }, (error) => {
+                    if (error.code === 404) this.setState({
+                        noComments: true
                     })
                 })
         }
