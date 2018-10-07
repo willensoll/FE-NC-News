@@ -20,31 +20,31 @@ class Articles extends Component {
         const { articles, loading, error } = this.state
         return (
             <React.Fragment>
-            <SortSelection handleSort={this.handleSort} value={this.state.sort} />
-            {!loading ?
-                error ? <Redirect to={'/errorpage'} />
-                    : <div>           
-                        {articles.map((article => {
-                            return (
-                                <div key={article._id}>
-                                    <ArticlePanel
-                                        title={article.title}
-                                        created_at={moment(article.created_at).fromNow()}
-                                        created_by={article.created_by.username}
-                                        avatar={article.created_by.avatar_url}
-                                        body={article.body}
-                                        comments={article.comments}
-                                        voteCount={article.votes}
-                                        id={article._id}
-                                        user={this.props.user}
-                                    />
-                                </div>
-                            )
-                        })
-                        )}
-                    </div>
-                : <div><LoadingBar /></div>}
-                </React.Fragment>
+                <SortSelection handleSort={this.handleSort} value={this.state.sort} />
+                {!loading ?
+                    error ? <Redirect to={'/errorpage'} />
+                        : <div>
+                            {articles.map((article => {
+                                return (
+                                    <div key={article._id}>
+                                        <ArticlePanel
+                                            title={article.title}
+                                            created_at={moment(article.created_at).fromNow()}
+                                            created_by={article.created_by.username}
+                                            avatar={article.created_by.avatar_url}
+                                            body={article.body}
+                                            comments={article.comments}
+                                            voteCount={article.votes}
+                                            id={article._id}
+                                            user={this.props.user}
+                                        />
+                                    </div>
+                                )
+                            })
+                            )}
+                        </div>
+                    : <div><LoadingBar /></div>}
+            </React.Fragment>
 
         )
     }

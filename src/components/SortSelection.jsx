@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel } from '@material-ui/core';
 
-
 const styles = {
     label: {
         margin: '1rem 1rem 0 0.5rem',
@@ -41,9 +40,9 @@ class SortSelection extends Component {
     }
 
     handleChange = event => {
-        this.setState({ 
+        this.setState({
             value: event.target.value
-         })
+        })
         this.props.handleSort(event.target.value);
     };
 }

@@ -17,8 +17,8 @@ const styles = {
   },
 };
 
-function LinearIndeterminate({classes}) {
- return (
+function LoadingBar({ classes }) {
+  return (
     <div className={classes.root}>
       <LinearProgress color="primary" />
       <br />
@@ -31,8 +31,8 @@ function LinearIndeterminate({classes}) {
   );
 }
 
-LinearIndeterminate.propTypes = {
+LoadingBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LinearIndeterminate);
+export default withStyles(styles)(LoadingBar);
