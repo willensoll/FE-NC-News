@@ -1,7 +1,6 @@
 Thank you for visiting my Northcoders News GitHub repo!
 
-This is the frontend section. you can find the backend section 
-
+This is the frontend section. you can find the backend section [here](https://github.com/willensoll/BE-NC-News)
 .
 
 Link to live deployment [here](https://we-ncnews.netlify.com/) (https://we-ncnews.netlify.com/)
