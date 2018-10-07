@@ -4,7 +4,7 @@ This is the frontend section. you can find the backend section [here](https://gi
 
 The frontend was built with [React](https://reactjs.org/), [React-Router](https://reacttraining.com/react-router/), [Material UI](https://material-ui.com/) and [Axios](https://github.com/axios/axios).
 
-Link to live deployment [here]( https://we-fe-nc-news.herokuapp.com/) (https://we-fe-nc-news.herokuapp.com/)
+Link to live deployment [here](https://we-ncnews.netlify.com/) (https://we-ncnews.netlify.com/)
 
 
 
