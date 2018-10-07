@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 import RemoveComment from '../RemoveComment'
 import Avatars from '../Avatars'
 
-
 import {
     withStyles,
     ExpansionPanelDetails, Typography,
@@ -30,11 +29,8 @@ const styles = () => ({
         maxWidth: '5%',
         width: "3rem",
         paddingRight: "1rem",
-        marginRight: '1rem',
+        margin: '1.5rem 1rem 0 0'
     },
-    avatar: {
-        marginTop: '1.5rem'
-    }
 });
 
 const CommentsPanel = ({ created_at, created_by, avatar, body,

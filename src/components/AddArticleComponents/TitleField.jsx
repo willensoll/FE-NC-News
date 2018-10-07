@@ -11,7 +11,7 @@ const TitleField = ({ handleChange }) => {
             margin="normal"
             variant="filled"
             placeholder="Your title here"
-        />
+                    />
     )
 }
 

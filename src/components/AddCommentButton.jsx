@@ -3,7 +3,6 @@ import propTypes from 'prop-types'
 import AddComment from '@material-ui/icons/AddComment'
 import AddCommentPanel from './PanelComponents/AddCommentPanel'
 
-
 import {
     withStyles, 
     Button,
@@ -17,9 +16,12 @@ const styles = (theme) => ({
         color: 'white',
         expansionPanelOpen: false
     },
+    applyCom: {
+        display: 'inline-block'
+    }
 });
 
-class ApplyComment extends Component {
+class AddCommentButton extends Component {
     state = {
         newComment: '',
         open: false,
@@ -30,8 +32,10 @@ class ApplyComment extends Component {
         const {anchorEl, open} = this.state
         return (
             <div>
-                 {<Button size="small" onClick={this.handleClick} variant="contained" colour="secondary" className={classes.button}>Add Comment
-                  <AddComment className={classes.addIcon} /></Button>}
+            <div  className={classes.applyCom}>
+                 {<Button size="small" onClick={this.handleClick} variant="contained" colour="secondary" className={classes.button}>{open ? 'Cancel' : 'Add Comment'}
+                  <AddComment /></Button>}
+            </div>
                   {open && <AddCommentPanel handleInput={this.handleInput} anchorEl={anchorEl} handleSubmit={this.handleSubmit}/>}                
             </div>
         );
@@ -52,21 +56,23 @@ class ApplyComment extends Component {
         })
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = () => {
         const { id, user, renderComment } = this.props
-        event.preventDefault()
         const newComment = {
             body: this.state.newComment,
             created_by: user
         }
         renderComment(id, newComment)
+        this.setState({
+            open: false
+        })
     }
 }
 
-ApplyComment.propTypes = {
+AddCommentButton.propTypes = {
     user: propTypes.string.isRequired,
     id: propTypes.string.isRequired,
     renderComment: propTypes.func.isRequired
 }
 
-export default withStyles(styles)(ApplyComment);
+export default withStyles(styles)(AddCommentButton);

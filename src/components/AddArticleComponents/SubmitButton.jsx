@@ -22,7 +22,7 @@ class SubmitButton extends Component {
             <div>
             <Button variant="contained" size="small" color="primary"
                 className={classes.button} onClick={this.handleClick}>
-                Submit Article!
+                Submit!
             </Button>
             <Popover
                 id="simple-popper"

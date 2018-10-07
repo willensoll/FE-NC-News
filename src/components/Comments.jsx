@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ApplyComment from './ApplyComment'
+import AddCommentButton from './AddCommentButton'
 import CommentsPanel from './PanelComponents/CommentsPanel'
 import Vote from './Vote.jsx'
 import * as api from '../apiUtils/api';
@@ -20,10 +20,10 @@ const styles = () => ({
     },
     column: {
         flexBasis: '43.33%',
-        marginBottom: '1rem'
+        marginBottom: '0.1rem'
     },
     button: {
-        marginTop: "0.5rem"
+        marginTop: "0.5rem",
     },
 });
 
@@ -43,7 +43,7 @@ class Comments extends Component {
                 <ExpansionPanel className={classes.root} expanded={expansionPanelOpen} onChange={() => null}>
                     <ExpansionPanelSummary>
                         <div className={classes.column}>
-                            <ApplyComment user={user} id={article} renderComment={this.renderComment} />
+                            <AddCommentButton user={user} id={article} renderComment={this.renderComment} />
                         </div>
                         <div className={classes.column}>
                             {<Vote voteCount={articleVotes} id={article} origin={"article"} />}
@@ -55,27 +55,27 @@ class Comments extends Component {
                                         expansionPanelOpen: !expansionPanelOpen
                                     })
                                 }} >
-                                {noComments? 'No Comments' : !expansionPanelOpen ? 'View Comments ' : 'Hide comments'} <CommentIcon className={classes.commentIcon} /></Button>}
+                                {noComments === true ? 'No Comments' : !expansionPanelOpen ? 'View Comments ' : 'Hide comments'} <CommentIcon className={classes.commentIcon} /></Button>}
                         </div>
                     </ExpansionPanelSummary>
-                        {comments.map((comment) => {
-                            return (
-                                !deletedComments.includes(comment._id) ?
-                                    <div key={comment._id}>
-                                        <CommentsPanel
-                                            title={comment.title}
-                                            created_at={moment(comment.created_at).fromNow()}
-                                            created_by={comment.created_by.username}
-                                            avatar={comment.created_by.avatar_url}
-                                            body={comment.body}
-                                            comments={comment.comments}
-                                            voteCount={comment.votes}
-                                            id={comment._id}
-                                            user={this.props.user}
-                                            deleteComment={this.deleteComment} />
-                                    </div> : null
-                            )
-                        })}
+                    {comments.map((comment) => {
+                        return (
+                            !deletedComments.includes(comment._id) ?
+                                <div key={comment._id}>
+                                    <CommentsPanel
+                                        title={comment.title}
+                                        created_at={moment(comment.created_at).fromNow()}
+                                        created_by={comment.created_by.username}
+                                        avatar={comment.created_by.avatar_url}
+                                        body={comment.body}
+                                        comments={comment.comments}
+                                        voteCount={comment.votes}
+                                        id={comment._id}
+                                        user={this.props.user}
+                                        deleteComment={this.deleteComment} />
+                                </div> : null
+                        )
+                    })}
                 </ExpansionPanel>
             </div>
         );
@@ -101,7 +101,7 @@ class Comments extends Component {
             api.fetchComments(articleId)
                 .then((comments) => {
                     this.setState({
-                        comments: comments.sort((a, b) => b.created_at.localeCompare(a.created_at))
+                        comments: comments.sort((a, b) => b.created_at.localeCompare(a.created_at)),
                     })
                 }, (error) => {
                     if (error.code === 404) this.setState({
@@ -115,7 +115,8 @@ class Comments extends Component {
         api.postCommentToArticle(id, newComment)
             .then((addedComment) => {
                 this.setState({
-                    comments: [...this.state.comments, addedComment.data.addedComment]
+                    comments: [addedComment.data.addedComment, ...this.state.comments],
+                    noComments: false
                 })
             })
     }
@@ -124,7 +125,7 @@ class Comments extends Component {
         api.deleteCommentfromArticle(id)
             .then(() => {
                 this.setState({
-                    deletedComments: [...this.state.deletedComments, id]
+                    deletedComments: [...this.state.deletedComments, id],
                 })
             })
     }

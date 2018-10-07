@@ -1,36 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+import propTypes from 'prop-types';
+import SubmitButton from '../AddArticleComponents/SubmitButton';
 
 import {
-    withStyles, TextField, Popper, Paper
+    withStyles, TextField
 } from '@material-ui/core';
 
 
-const styles = (theme) => ({
+const styles = () => ({
     textField: {
-        width: '50vw',
-        marginTop: '2rem',
-        display: 'inline-block'
-    }
+        width: '40vw',
+        marginTop: '1.5rem',
+    },
 })
 
 const AddCommentPanel = ({ handleInput, handleSubmit, classes }) => {
     return (
-        <div>
-            <TextField
+        <React.Fragment>
+              <TextField
                 id="filled-multiline-flexible"
                 label="Your comment here.."
                 multiline
                 rows="5"
                 onChange={handleInput}
                 margin="none"
-                fullWidth
                 variant="filled"
                 required={true}
                 className={classes.textField}
             />
-        </div>
+            <SubmitButton handleSubmit={handleSubmit} />
+            </React.Fragment>         
     )
 }
 export default withStyles(styles)(AddCommentPanel);
+
+AddCommentPanel.propTypes = {
+    handleInput: propTypes.func.isRequired,
+    handleSubmit: propTypes.func.isRequired
+}

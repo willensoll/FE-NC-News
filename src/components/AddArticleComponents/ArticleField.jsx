@@ -14,7 +14,6 @@ const ArticleField = ({handleChange}) => {
             fullWidth
             variant="filled"
             placeholder="Your article here.."
-            required={true}
           />
     )
 }

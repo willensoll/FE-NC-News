@@ -3,21 +3,27 @@ import * as api from '../apiUtils/api';
 import moment from 'moment';
 import ArticlePanel from './PanelComponents/ArticlePanel';
 import propTypes from 'prop-types';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import LoadingBar from './LoadingBar';
+import SortSelection from './SortSelection';
+import sort from '../apiUtils/sortFunc'
 
 class Articles extends Component {
     state = {
         articles: [],
         loading: true,
-        error: null
+        error: null,
+        sort: 'new'
     }
 
     render() {
         const { articles, loading, error } = this.state
         return (
-            !loading ?
+            <React.Fragment>
+            <SortSelection handleSort={this.handleSort} value={this.state.sort} />
+            {!loading ?
                 error ? <Redirect to={'/errorpage'} />
-                    : <div>
+                    : <div>           
                         {articles.map((article => {
                             return (
                                 <div key={article._id}>
@@ -37,7 +43,8 @@ class Articles extends Component {
                         })
                         )}
                     </div>
-                : <div>loading...</div>
+                : <div><LoadingBar /></div>}
+                </React.Fragment>
 
         )
     }
@@ -47,12 +54,12 @@ class Articles extends Component {
         api.fetchArticles(param)
             .then((articles) => {
                 this.setState({
-                    articles: articles.sort((a, b) => b.created_at.localeCompare(a.created_at)),
+                    articles: sort(articles, this.state.filter),
                     loading: false
                 })
-            }).catch((err) => {
+            }, (error) => {
                 this.setState({
-                    error: err,
+                    error: error,
                     loading: false
                 })
             })
@@ -64,16 +71,23 @@ class Articles extends Component {
             api.fetchArticles(param)
                 .then((articles) => {
                     this.setState({
-                        articles: articles.sort((a, b) => b.created_at.localeCompare(a.created_at)),
+                        articles: sort(articles, this.state.filter),
                         loading: false
                     })
-                }).catch((err) => {
+                }, (error) => {
                     this.setState({
-                        error: err,
+                        error: error,
                         loading: false
                     })
                 })
         }
+    }
+
+    handleSort = (sortVal) => {
+        this.setState({
+            articles: sort(this.state.articles, sortVal),
+            sort: sortVal
+        })
     }
 }
 

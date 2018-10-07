@@ -27,8 +27,8 @@ const styles = () => ({
     column: {
         flexBasis: '45%'
     },
-    avatarDis: {
-        marginRight: '1rem'
+    body: {
+        margin: '0 1.5rem'
     }
 });
 const ArticlePanel = ({ title, created_at, created_by, avatar, body, voteCount, id, user, classes }) => {
@@ -44,7 +44,7 @@ const ArticlePanel = ({ title, created_at, created_by, avatar, body, voteCount, 
                 </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-                <Typography>
+                <Typography className={classes.body}>
                     {body}
                 </Typography>
             </ExpansionPanelDetails>

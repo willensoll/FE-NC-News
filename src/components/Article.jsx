@@ -4,6 +4,7 @@ import moment from 'moment';
 import ArticlePage from './ArticlePage';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom'
+import LoadingBar from './LoadingBar'
 
 class Article extends Component {
     state = {
@@ -28,7 +29,7 @@ class Article extends Component {
                             user={this.props.user}
                         />
                     </div>
-                : <div>loading...</div>
+                : <div><LoadingBar /></div>
         );
     }
 
@@ -40,9 +41,9 @@ class Article extends Component {
                     article,
                     loading: false
                 })
-            }).catch((err) => {
+            }, (error) => {
                 this.setState({
-                    error: err,
+                    error: error,
                     loading: false
                 })
             })
@@ -57,9 +58,9 @@ class Article extends Component {
                         article,
                         loading: false
                     })
-                }).catch((err) => {
+                }, (error) => {
                     this.setState({
-                        error: err,
+                        error: error,
                         loading: false
                     })
                 })
