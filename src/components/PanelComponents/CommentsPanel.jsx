@@ -13,7 +13,7 @@ import {
 const styles = () => ({
     column: {
         flexBasis: '80%',
-        marginRight: '2rem'
+        marginRight: '1rem'
     },
     commentPanel: {
         border: 'solid 1px white'
